@@ -11,7 +11,7 @@ import com.sirvigorous.ladywrangler.dummy.DummyContent;
 
 /**
  * A fragment representing a single Lady detail screen. This fragment is either
- * contained in a {@link LadyListActivity} in two-pane mode (on tablets) or a
+ * contained in a {@link Lady_List_Activity} in two-pane mode (on tablets) or a
  * {@link LadyDetailActivity} on handsets.
  */
 public class LadyDetailFragment extends Fragment {

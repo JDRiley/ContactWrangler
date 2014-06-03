@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import com.sirvigorous.ladywrangler.dummy.DummyContent;
 
@@ -18,7 +18,7 @@ import com.sirvigorous.ladywrangler.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class LadyListFragment extends ListFragment {
+public class Lady_List_Fragment extends ListFragment {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -30,7 +30,7 @@ public class LadyListFragment extends ListFragment {
 	 * The fragment's current callback object, which is notified of list item
 	 * clicks.
 	 */
-	private Callbacks mCallbacks = sDummyCallbacks;
+	private Callbacks mCallbacks = s_dummy_callback;
 
 	/**
 	 * The current activated item position. Only used on tablets.
@@ -53,7 +53,7 @@ public class LadyListFragment extends ListFragment {
 	 * A dummy implementation of the {@link Callbacks} interface that does
 	 * nothing. Used only when this fragment is not attached to an activity.
 	 */
-	private static Callbacks sDummyCallbacks = new Callbacks() {
+	private static Callbacks s_dummy_callback = new Callbacks() {
 		@Override
 		public void onItemSelected(String id) {
 		}
@@ -63,7 +63,7 @@ public class LadyListFragment extends ListFragment {
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
 	 */
-	public LadyListFragment() {
+	public Lady_List_Fragment() {
 	}
 
 	@Override
@@ -71,9 +71,17 @@ public class LadyListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 
 		// TODO: replace with a real list adapter.
-		setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, DummyContent.ITEMS));
+		
+		String[] name_collumn = new String[] {"name"};
+		int[] id_mapping = new int[] {android.R.id.text1};
+		
+		M_contact_adapter 
+		= new SimpleCursorAdapter(getActivity()
+				, android.R.layout.simple_list_item_activated_1, null
+				, name_collumn, id_mapping, 0);
+		
+		
+		setListAdapter(M_contact_adapter);
 	}
 
 	@Override
@@ -106,7 +114,7 @@ public class LadyListFragment extends ListFragment {
 		super.onDetach();
 
 		// Reset the active callbacks interface to the dummy implementation.
-		mCallbacks = sDummyCallbacks;
+		mCallbacks = s_dummy_callback;
 	}
 
 	@Override
@@ -149,4 +157,6 @@ public class LadyListFragment extends ListFragment {
 
 		mActivatedPosition = position;
 	}
+	
+	private SimpleCursorAdapter M_contact_adapter;
 }

@@ -9,7 +9,7 @@ import android.view.MenuItem;
 /**
  * An activity representing a single Lady detail screen. This activity is only
  * used on handset devices. On tablet-size devices, item details are presented
- * side-by-side with a list of items in a {@link LadyListActivity}.
+ * side-by-side with a list of items in a {@link Lady_List_Activity}.
  * <p>
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link LadyDetailFragment}.
@@ -58,7 +58,7 @@ public class LadyDetailActivity extends FragmentActivity {
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
 			NavUtils.navigateUpTo(this,
-					new Intent(this, LadyListActivity.class));
+					new Intent(this, Lady_List_Activity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
