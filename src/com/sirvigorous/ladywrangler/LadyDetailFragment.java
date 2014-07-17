@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sirvigorous.ladywrangler.dummy.DummyContent;
+
 
 /**
  * A fragment representing a single Lady detail screen. This fragment is either
  * contained in a {@link Lady_List_Activity} in two-pane mode (on tablets) or a
- * {@link LadyDetailActivity} on handsets.
+ * {@link LadyDetailActivity} on hand-sets.
  */
 public class LadyDetailFragment extends Fragment {
 	/**
@@ -24,7 +24,7 @@ public class LadyDetailFragment extends Fragment {
 	/**
 	 * The dummy content this fragment is presenting.
 	 */
-	private DummyContent.DummyItem mItem;
+
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -37,13 +37,7 @@ public class LadyDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (getArguments().containsKey(ARG_ITEM_ID)) {
-			// Load the dummy content specified by the fragment
-			// arguments. In a real-world scenario, use a Loader
-			// to load content from a content provider.
-			mItem = DummyContent.ITEM_MAP.get(getArguments().getString(
-					ARG_ITEM_ID));
-		}
+		
 	}
 
 	@Override
@@ -53,10 +47,10 @@ public class LadyDetailFragment extends Fragment {
 				container, false);
 
 		// Show the dummy content as text in a TextView.
-		if (mItem != null) {
-			((TextView) rootView.findViewById(R.id.lady_detail))
-					.setText(mItem.content);
-		}
+	//	if (mItem != null) {
+	//		((TextView) rootView.findViewById(R.id.lady_detail))
+	//				.setText(mItem.content);
+	//	}
 
 		return rootView;
 	}

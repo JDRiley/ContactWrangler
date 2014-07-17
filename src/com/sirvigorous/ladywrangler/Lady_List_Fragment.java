@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import com.sirvigorous.ladywrangler.dummy.DummyContent;
+
 
 /**
  * A list fragment representing a list of Ladies. This fragment also supports
@@ -30,7 +30,7 @@ public class Lady_List_Fragment extends ListFragment {
 	 * The fragment's current callback object, which is notified of list item
 	 * clicks.
 	 */
-	private Callbacks mCallbacks = s_dummy_callback;
+
 
 	/**
 	 * The current activated item position. Only used on tablets.
@@ -106,7 +106,7 @@ public class Lady_List_Fragment extends ListFragment {
 					"Activity must implement fragment's callbacks.");
 		}
 
-		mCallbacks = (Callbacks) activity;
+	
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class Lady_List_Fragment extends ListFragment {
 		super.onDetach();
 
 		// Reset the active callbacks interface to the dummy implementation.
-		mCallbacks = s_dummy_callback;
+
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class Lady_List_Fragment extends ListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		
 	}
 
 	@Override
