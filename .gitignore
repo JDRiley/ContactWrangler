@@ -1,6 +1,6 @@
 gen/
 *.class
-
+git_push.tcl
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
