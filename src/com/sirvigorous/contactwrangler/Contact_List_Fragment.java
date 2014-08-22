@@ -58,6 +58,8 @@ public class Contact_List_Fragment extends ListFragment {
 		 */
 		public void on_contact_selected(Contact i_lady_contact);
 		
+		public void add_contacts_from_phone();
+		
 		public void add_new_contact();
 		
 		public void add_test();
@@ -91,8 +93,7 @@ public class Contact_List_Fragment extends ListFragment {
 
 	
 
-		 String message = "There are " + 23 + " available flavors.";
-		 System.out.println(message);
+
 	
 	}
 	
@@ -217,6 +218,7 @@ public class Contact_List_Fragment extends ListFragment {
 	   @Override
 	   public boolean onOptionsItemSelected(MenuItem item) 
 	   {
+		   
 	      switch (item.getItemId())
 	      {
 	         case R.id.action_add_new_contact:
@@ -229,6 +231,9 @@ public class Contact_List_Fragment extends ListFragment {
 	         case R.id.clear_contacts:
 	        	 M_listener.clear_contacts();
 	        	 update_contact_list();
+	        	 return true;
+	         case R.id.action_import_contacts_from_phone:
+	        	 M_listener.add_contacts_from_phone();
 	        	 return true;
 	      }
 	      

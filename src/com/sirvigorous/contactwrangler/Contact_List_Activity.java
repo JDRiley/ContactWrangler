@@ -23,10 +23,11 @@ import com.sirvigorous.contactwrangler.Contact_List_Fragment;
  * interface to listen for item selections.
  */
 public class Contact_List_Activity extends Activity implements
-		Contact_List_Fragment.Callback, Add_Edit_Contact_Fragment.Listener {
+		Contact_List_Fragment.Callback, Add_Edit_Contact_Fragment.Listener
+		, Import_Contacts_From_Phone_Fragment.Callback{
 
 
-	private Contact_List_Fragment M_lady_list_fragment;
+	private Contact_List_Fragment M_contact_list_fragment;
 
 
 static public final String ROW_ID = "Contact_database_row_id";
@@ -49,10 +50,10 @@ static public final String ROW_ID = "Contact_database_row_id";
 			return;
 		}
 		
-		M_lady_list_fragment = new Contact_List_Fragment();
+		M_contact_list_fragment = new Contact_List_Fragment();
 		
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.add(R.id.main_body_frame, M_lady_list_fragment);
+		transaction.add(R.id.main_body_frame, M_contact_list_fragment);
 
 		transaction.commit();
 		
@@ -74,7 +75,10 @@ static public final String ROW_ID = "Contact_database_row_id";
 	}
 	
 	
-
+	@Override
+	public void add_contacts_from_phone(){
+		switch_main_body_fragment(new Import_Contacts_From_Phone_Fragment(), "Adding from phone contacts");
+	}
 	
 	
 	@Override
