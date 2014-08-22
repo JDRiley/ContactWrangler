@@ -83,9 +83,9 @@ static public final String ROW_ID = "Contact_database_row_id";
 	
 	@Override
 	public void on_contact_selected(Contact i_Contact) {
-		Contact_Detail_Fragment detail_fragment = new Contact_Detail_Fragment(i_Contact);
 
-		switch_main_body_fragment(detail_fragment, "Detail Fragment");
+
+		switch_main_body_fragment(new Contact_Detail_Fragment(i_Contact), "Detail Fragment");
 		
 	}
 	

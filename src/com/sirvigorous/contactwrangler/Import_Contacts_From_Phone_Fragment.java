@@ -1,6 +1,6 @@
 package com.sirvigorous.contactwrangler;
 
-import android.R.integer;
+
 import android.app.ListFragment;
 import android.content.CursorLoader;
 import android.content.Loader;
