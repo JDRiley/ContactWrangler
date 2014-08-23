@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.database.Cursor;
-import android.database.MatrixCursor;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;

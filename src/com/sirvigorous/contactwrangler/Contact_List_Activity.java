@@ -24,7 +24,8 @@ import com.sirvigorous.contactwrangler.Contact_List_Fragment;
  */
 public class Contact_List_Activity extends Activity implements
 		Contact_List_Fragment.Callback, Add_Edit_Contact_Fragment.Listener
-		, Import_Contacts_From_Phone_Fragment.Callback{
+		, Import_Contacts_From_Phone_Fragment.Callback
+		, Processing_Manager.Callback{
 
 
 	private Contact_List_Fragment M_contact_list_fragment;
@@ -57,7 +58,8 @@ static public final String ROW_ID = "Contact_database_row_id";
 
 		transaction.commit();
 		
-		add_test();
+	
+		add_contacts_from_phone();
 	}
 	
 	@Override
@@ -123,5 +125,17 @@ static public final String ROW_ID = "Contact_database_row_id";
 		
 
 			
+	}
+
+	@Override
+	public void alert_processing(int i_id, String i_message){
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void alert_end_processing(int i_id){
+		// TODO Auto-generated method stub
+		
 	}
 }
