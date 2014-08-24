@@ -101,7 +101,6 @@ static public final String ROW_ID = "Contact_database_row_id";
 	@Override
 	public void on_add_edit_completed(Contact i_contact){
 		getFragmentManager().popBackStack();
-		
 	}
 	
 	@Override

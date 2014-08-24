@@ -3,26 +3,8 @@ package com.sirvigorous.contactwrangler;
 
 import java.util.ArrayList;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import com.sirvigorous.contactwrangler.Add_Edit_Contact_Fragment.Listener;
-
-import android.R.anim;
-import android.R.bool;
 import android.R.integer;
+import android.R.string;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.CursorLoader;
@@ -31,7 +13,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.telephony.PhoneStateListener;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -181,34 +162,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 		@Override
 		public void onLoadFinished(Loader<Cursor> i_loader, Cursor i_cursor){
 
-			MatrixCursor temp_names_only_Cursor
-			= new MatrixCursor(M_matrix_projection, i_cursor.getCount());
-			
-			ArrayList<String[]> contact_data
-			= new ArrayList<String[]>();
-			
-			while(i_cursor.moveToNext()){
-				String[] contact_data_array = new String[4];
-				
-				contact_data_array[0] = i_cursor.getString(CONTACT_ID_INDEX);
-				contact_data_array[1] = i_cursor.getString(LOOKUP_KEY_INDEX);
-				String display_name = i_cursor.getString(CONTACT_NAME_INDEX);
-				contact_data_array[2] = display_name;
-				
-				
-				contact_data_array[3] = "";
-				contact_data.add(contact_data_array);
-				temp_names_only_Cursor.addRow(contact_data_array);
-			}
-		
-			
-			
-			
-
-			M_contact_adapter.swapCursor(temp_names_only_Cursor);
-			M_contact_data_array = contact_data;
-			
-			i_cursor.moveToPosition(-1);
+	
 			new Set_Contact_Numbers_Task().execute(new Cursor[]{i_cursor});	
 		}
 
@@ -237,36 +191,53 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 			
 			ArrayList<String[]> contacts_array
 			= new ArrayList<String[]>();
-			while(cursor.moveToNext()){
+			
+			
+			Cursor all_phone_data_cursor 
+			= getActivity().getContentResolver()
+			.query(
+				Phone.CONTENT_URI, new String[]{Phone.CONTACT_ID, Phone.LOOKUP_KEY, Phone.DISPLAY_NAME_PRIMARY, Phone.NORMALIZED_NUMBER}
+				, Phone.HAS_PHONE_NUMBER, null, Phone.DISPLAY_NAME_PRIMARY);
+			
+	
+			
+			String last_id = "";
+			final int contact_id_index = all_phone_data_cursor.getColumnIndex(Phone.CONTACT_ID);
+			final int phone_number_index = all_phone_data_cursor.getColumnIndex(Phone.NORMALIZED_NUMBER);
+			final int display_name_index = all_phone_data_cursor.getColumnIndex(Phone.DISPLAY_NAME_PRIMARY);
+			final int lookup_key_index = all_phone_data_cursor.getColumnIndex(Phone.LOOKUP_KEY);
+			int index = 0;
+			
+			
+			
+			while(all_phone_data_cursor.moveToNext()){
+				if(last_id.equals(all_phone_data_cursor.getString(contact_id_index))){
+					continue;
+				}
+				
+				
 				String[] contact_data_array = new String[4];
 				
-				contact_data_array[0] = cursor.getString(CONTACT_ID_INDEX);
-				contact_data_array[1] = cursor.getString(LOOKUP_KEY_INDEX);
-				String display_name = cursor.getString(CONTACT_NAME_INDEX);
+				contact_data_array[0] = all_phone_data_cursor.getString(contact_id_index);
+				contact_data_array[1] = all_phone_data_cursor.getString(lookup_key_index);
+				String display_name = all_phone_data_cursor.getString(display_name_index);
 				contact_data_array[2] = display_name;
+				contact_data_array[3] = all_phone_data_cursor.getString(phone_number_index);
+				assert(M_contact_data_array.get(index)[CONTACT_ID_INDEX].equals(contact_data_array[0]));
 				
-				Cursor phone_cursor = getActivity().getContentResolver()
-				.query(Phone.CONTENT_URI, new String[]{Phone.NORMALIZED_NUMBER}
-						, Phone.DISPLAY_NAME_PRIMARY + "= ?"
-						, new String[]{display_name}, null);
 				
-				phone_cursor.moveToFirst();
-				final int phone_collumn = phone_cursor.getColumnIndex(Phone.NORMALIZED_NUMBER);
-				contact_data_array[3] = phone_cursor.getString(phone_collumn);
+				if(contact_data_array[3] == null){
+					continue;
+				}
 				
-				filled_matrix_cursor.addRow(contact_data_array);
+				last_id = contact_data_array[0]; 
 				contacts_array.add(contact_data_array);
-				phone_cursor.close();
-				
-		
-				
+				filled_matrix_cursor.addRow(contact_data_array);
+				++index;
 			}
-			
-			
-
-			M_contact_data_array = contacts_array;
-			
+						M_contact_data_array = contacts_array;
 			return filled_matrix_cursor;
+			
 
 }
 		@Override
