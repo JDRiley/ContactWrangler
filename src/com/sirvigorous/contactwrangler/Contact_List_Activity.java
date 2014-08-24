@@ -1,4 +1,5 @@
 package com.sirvigorous.contactwrangler;
+import android.R.bool;
 import android.app.Fragment;
 
 
@@ -24,7 +25,7 @@ import com.sirvigorous.contactwrangler.Contact_List_Fragment;
  */
 public class Contact_List_Activity extends Activity implements
 		Contact_List_Fragment.Callback, Add_Edit_Contact_Fragment.Listener
-		, Import_Contacts_From_Phone_Fragment.Callback
+		, Import_Contacts_From_Phone_Fragment.Listener
 		, Processing_Manager.Callback{
 
 
@@ -40,6 +41,12 @@ static public final String ROW_ID = "Contact_database_row_id";
 		transaction.replace(R.id.main_body_frame, i_fragment);
 		transaction.addToBackStack(i_string);
 		transaction.commit();
+	}
+	
+	
+	@Override
+	public void update_contact_list(){
+		M_contact_list_fragment.update_contact_list();
 	}
 	
 	@Override
@@ -137,5 +144,11 @@ static public final String ROW_ID = "Contact_database_row_id";
 	public void alert_end_processing(int i_id){
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void fragment_completed(boolean i_update_contacts){
+		getFragmentManager().popBackStack();
+
 	}
 }
