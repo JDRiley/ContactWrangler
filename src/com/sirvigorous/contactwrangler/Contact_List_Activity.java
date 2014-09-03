@@ -34,7 +34,26 @@ public class Contact_List_Activity extends Activity implements
 
 static public final String ROW_ID = "Contact_database_row_id";
 
-
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_contact_list);
+		
+		if(savedInstanceState != null){
+			return;
+		}
+		
+		M_contact_list_fragment = new Contact_List_Fragment();
+		
+		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		transaction.add(R.id.main_body_frame, M_contact_list_fragment);
+	
+		transaction.commit();
+		
+	
+		
+	}
+	
 	void switch_main_body_fragment(Fragment i_fragment, String i_string){
 		
 		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -49,25 +68,7 @@ static public final String ROW_ID = "Contact_database_row_id";
 		M_contact_list_fragment.update_contact_list();
 	}
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_contact_list);
-		
-		if(savedInstanceState != null){
-			return;
-		}
-		
-		M_contact_list_fragment = new Contact_List_Fragment();
-		
-		android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-		transaction.add(R.id.main_body_frame, M_contact_list_fragment);
 
-		transaction.commit();
-		
-	
-		add_contacts_from_phone();
-	}
 	
 	@Override
 	protected void onResume(){
@@ -120,10 +121,10 @@ static public final String ROW_ID = "Contact_database_row_id";
 			.update_to_database();
 		
 		
-		new Contact(this, "Jasmine", "Other Xi", 2124317751l, rules[1])
+		new Contact(this, "Jasmine", "Other Xi", 15555555554l, rules[0])
 			.update_to_database();;
 		
-		new Contact(this, "Danielle", "House Party", 2024576288l, rules[2])
+		new Contact(this, "Danielle", "House Party", 2024576288l, rules[1])
 			.update_to_database();;
 		
 		new Contact(this, "Tamera", "Planet Xenon", 7647418799l, rules[2])

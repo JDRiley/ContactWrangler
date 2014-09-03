@@ -13,11 +13,13 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 
 	public interface Listener{
 		public void fragment_completed(boolean i_update_contacts);
+		
 		
 		public void update_contact_list();
 	};
@@ -95,6 +98,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 				, android.R.layout.simple_list_item_activated_2, null
 				, name_collumn, id_mapping, 0);
 		
+
 		
 		setListAdapter(M_contact_adapter);
 	}
@@ -214,6 +218,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 				if(last_id.equals(all_phone_data_cursor.getString(contact_id_index))){
 					continue;
 				}
+
 				
 				
 				String[] contact_data_array = new String[4];
@@ -224,6 +229,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 				contact_data_array[2] = display_name;
 				contact_data_array[3] = all_phone_data_cursor.getString(phone_number_index);
 				assert(M_contact_data_array.get(index)[CONTACT_ID_INDEX].equals(contact_data_array[0]));
+				
 				
 				
 				if(contact_data_array[3] == null){
