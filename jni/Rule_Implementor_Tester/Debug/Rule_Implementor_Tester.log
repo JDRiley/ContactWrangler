@@ -1,0 +1,10 @@
+﻿Build started 9/8/2014 3:45:38 PM.
+     1>Project "J:\Java Studio\AndroidMaster\ContactWrangler\jni\Rule_Implementor_Tester\Rule_Implementor_Tester.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         J:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"../lib/Rule_Implementor_Tester_D.exe" /INCREMENTAL /NOLOGO /LIBPATH:../lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"../lib/Rule_Implementor_Tester_D.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../lib/Rule_Implementor_Tester_D.lib" /MACHINE:X64 Debug/Rules_Implementor_Tester.obj
+         Rule_Implementor_Tester.vcxproj -> J:\Java Studio\AndroidMaster\ContactWrangler\jni\Rule_Implementor_Tester\../lib/Rule_Implementor_Tester_D.exe
+     1>Done Building Project "J:\Java Studio\AndroidMaster\ContactWrangler\jni\Rule_Implementor_Tester\Rule_Implementor_Tester.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.05

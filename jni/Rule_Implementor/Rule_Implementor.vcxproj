@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8B9C5C74-AE07-4545-AE05-F3064467EA37}</ProjectGuid>
+    <RootNamespace>Rules_Implementor</RootNamespace>
+    <ProjectName>Rule_Implementor</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>../lib/</OutDir>
+    <IntDir>$(Configuration)/</IntDir>
+    <TargetExt>.lib</TargetExt>
+    <TargetName>$(ProjectName)32_D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../lib/</OutDir>
+    <IntDir>$(Configuration)/</IntDir>
+    <TargetExt>.lib</TargetExt>
+    <TargetName>$(ProjectName)32</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>../lib/</OutDir>
+    <IntDir>$(Configuration)/</IntDir>
+    <TargetExt>.lib</TargetExt>
+    <TargetName>$(ProjectName)_D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>../lib/</OutDir>
+    <IntDir>$(Configuration)/</IntDir>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WEBSOCKETPP_CPP11_SYSTEM_ERROR_
+;WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4800;4706;4512;4290;4996;4510;4511;4250;</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>../include;</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WEBSOCKETPP_CPP11_SYSTEM_ERROR_
+;WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4800;4706;4512;4290;4996;4510;4511;4250;</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>../include;</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WEBSOCKETPP_CPP11_SYSTEM_ERROR_
+;WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4800;4706;4512;4290;4996;4510;4511;4250;</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>../include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_WEBSOCKETPP_CPP11_SYSTEM_ERROR_
+;WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4800;4706;4512;4290;4996;4510;4511;4250;</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>../include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Addition_Expression.h" />
+    <ClInclude Include="Aggregate_Value_Symbol.h" />
+    <ClInclude Include="Arguments.h" />
+    <ClInclude Include="Assignment_Expression.h" />
+    <ClInclude Include="Binary_Expression.h" />
+    <ClInclude Include="Binary_Filter_Specification.h" />
+    <ClInclude Include="Call_Expression.h" />
+    <ClInclude Include="Combined_Filter_Specification.h" />
+    <ClInclude Include="Constant_Symbol.h" />
+    <ClInclude Include="Constant_Symbol_Factory.h" />
+    <ClInclude Include="Custom_Routine_Symbol.h" />
+    <ClInclude Include="Division_Expression.h" />
+    <ClInclude Include="Expression_List.h" />
+    <ClInclude Include="Expression_Statement.h" />
+    <ClInclude Include="Field_Access_Expression.h" />
+    <ClInclude Include="Filter_Call_Expression.h" />
+    <ClInclude Include="Filter_Specification.h" />
+    <ClInclude Include="Has_Filter_Specification.h" />
+    <ClInclude Include="If_Statement.h" />
+    <ClInclude Include="j_declaration.h" />
+    <ClInclude Include="j_expression.h" />
+    <ClInclude Include="j_number_symbol.h" />
+    <ClInclude Include="j_physical_constants.h" />
+    <ClInclude Include="j_placeholder_symbol.h" />
+    <ClInclude Include="j_routine_symbol.h" />
+    <ClInclude Include="j_statement.h" />
+    <ClInclude Include="j_symbol.h" />
+    <ClInclude Include="j_symbol_component.h" />
+    <ClInclude Include="J_Symbol_Component_Allocator.h" />
+    <ClInclude Include="J_Symbol_Component_Array.h" />
+    <ClInclude Include="j_symbol_component_list.h" />
+    <ClInclude Include="j_symbol_containers.h" />
+    <ClInclude Include="J_Symbol_Error.h" />
+    <ClInclude Include="J_Symbol_Identifier.h" />
+    <ClInclude Include="J_Symbol_Scope.h" />
+    <ClInclude Include="j_unit.h" />
+    <ClInclude Include="j_value.h" />
+    <ClInclude Include="math_base.h" />
+    <ClInclude Include="Multiplication_Expression.h" />
+    <ClInclude Include="Negated_Filter_Specification.h" />
+    <ClInclude Include="Operators.h" />
+    <ClInclude Include="Relational_Binary_Expression.h" />
+    <ClInclude Include="Rule_Implementor_Fwd_Decl.h" />
+    <ClInclude Include="Rule_Implementor.h" />
+    <ClInclude Include="Rule_Data.h" />
+    <ClInclude Include="State_Declaration.h" />
+    <ClInclude Include="State_ID.h" />
+    <ClInclude Include="State_Specification.h" />
+    <ClInclude Include="System_Call_Expression.h" />
+    <ClInclude Include="Transfer_Statement.h" />
+    <ClInclude Include="Type_Aggregate.h" />
+    <ClInclude Include="Unary_Filter_Specification.h" />
+    <ClInclude Include="Unary_Not_Expression.h" />
+    <ClInclude Include="Void_Empty_Expression.h" />
+    <ClInclude Include="Wrangler_Filter.h" />
+    <ClInclude Include="Wrangler_Function.h" />
+    <ClInclude Include="Wrangler_Rules_Parser.h" />
+    <ClInclude Include="j_yy_stack.h" />
+    <ClInclude Include="Lexer_Location.h" />
+    <ClInclude Include="location.hh" />
+    <ClInclude Include="Rule_Parser.h" />
+    <ClInclude Include="rule_parsing_unit.hh" />
+    <ClInclude Include="Specific_Symbol_List.h" />
+    <ClInclude Include="Statement_Block.h" />
+    <ClInclude Include="Subtraction_Expression.h" />
+    <ClInclude Include="Symbol_Component_List.h" />
+    <ClInclude Include="Symbol_Types.h" />
+    <ClInclude Include="Type_Bool.h" />
+    <ClInclude Include="Type_Double.h" />
+    <ClInclude Include="Type_Factory.h" />
+    <ClInclude Include="Type_Int.h" />
+    <ClInclude Include="Type_Routine.h" />
+    <ClInclude Include="Type_Routine_Variable_Args.h" />
+    <ClInclude Include="Type_String.h" />
+    <ClInclude Include="Type_Syntax.h" />
+    <ClInclude Include="Type_Void.h" />
+    <ClInclude Include="Unary_Negate_Expression.h" />
+    <ClInclude Include="Unary_Operator_Expression.h" />
+    <ClInclude Include="Value_Expression.h" />
+    <ClInclude Include="Variable_Reference_Symbol.h" />
+    <ClInclude Include="Variable_Symbol.h" />
+    <CustomBuild Include="Rule_Lexer.h">
+      <AdditionalInputs>Rule_Lexer.h;Rule_Lexer.l;</AdditionalInputs>
+      <Command>win_flex -d -oRule_YY_Lex.cpp Rule_Lexer.l</Command>
+      <Message>win_flex -d -oRule_YY_Lex.cpp Rule_Lexer.l</Message>
+      <Outputs>Rule_YY_Lex.cpp;%(Outputs)</Outputs>
+      <LinkObjects>false</LinkObjects>
+    </CustomBuild>
+    <CustomBuild Include="parser.h">
+      <AdditionalInputs>parser.y;</AdditionalInputs>
+      <Command>win_bison -v -t --defines=rule_parsing_unit.hh -orule_parsing_unit.cc parser.y</Command>
+      <Message>win_bison -v -t --defines=rule_parsing_unit.hh -orule_parsing_unit.cc parser.y</Message>
+      <Outputs>rule_parsing_unit.cc;rule_parsing_unit.hh</Outputs>
+      <LinkObjects>false</LinkObjects>
+    </CustomBuild>
+    <ClInclude Include="position.hh" />
+    <ClInclude Include="stack.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Addition_Expression.cpp" />
+    <ClCompile Include="Aggregate_Value_Symbol.cpp" />
+    <ClCompile Include="Arguments.cpp" />
+    <ClCompile Include="Assignment_Expression.cpp" />
+    <ClCompile Include="Binary_Expression.cpp" />
+    <ClCompile Include="Binary_Filter_Specification.cpp" />
+    <ClCompile Include="Call_Expression.cpp" />
+    <ClCompile Include="Combined_Filter_Specification.cpp" />
+    <ClCompile Include="Constant_Symbol.cpp" />
+    <ClCompile Include="Constant_Symbol_Factory.cpp" />
+    <ClCompile Include="Custom_Routine_Symbol.cpp" />
+    <ClCompile Include="Division_Expression.cpp" />
+    <ClCompile Include="Expression_List.cpp" />
+    <ClCompile Include="Expression_Statement.cpp" />
+    <ClCompile Include="Field_Access_Expression.cpp" />
+    <ClCompile Include="Filter_Call_Expression.cpp" />
+    <ClCompile Include="Filter_Specification.cpp" />
+    <ClCompile Include="Has_Filter_Specification.cpp" />
+    <ClCompile Include="If_Statement.cpp" />
+    <ClCompile Include="j_declaration.cpp" />
+    <ClCompile Include="j_expression.cpp" />
+    <ClCompile Include="j_placeholder_symbol.cpp" />
+    <ClCompile Include="j_routine_symbol.cpp" />
+    <ClCompile Include="j_statement.cpp" />
+    <ClCompile Include="j_symbol.cpp" />
+    <ClCompile Include="j_symbol_array.cpp" />
+    <ClCompile Include="j_symbol_component.cpp" />
+    <ClCompile Include="j_symbol_component_list.cpp" />
+    <ClCompile Include="J_Symbol_Error.cpp" />
+    <ClCompile Include="J_Symbol_Identifier.cpp" />
+    <ClCompile Include="J_Symbol_Scope.cpp" />
+    <ClCompile Include="j_unit.cpp" />
+    <ClCompile Include="j_value.cpp" />
+    <ClCompile Include="J_Value_Types.cpp" />
+    <ClCompile Include="math_base.cpp" />
+    <ClCompile Include="Multiplication_Expression.cpp" />
+    <ClCompile Include="Negated_Filter_Specification.cpp" />
+    <ClCompile Include="Pre_Decrement_Expression.cpp" />
+    <ClCompile Include="Pre_Increment_Expression.cpp" />
+    <ClCompile Include="Relational_Binary_Expression.cpp" />
+    <ClCompile Include="Rule_Implementor.cpp" />
+    <ClCompile Include="Rule_Lexer.cpp" />
+    <ClCompile Include="Rule_Data.cpp" />
+    <ClCompile Include="Rule_YY_Lex.cpp">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Statement_Block.cpp" />
+    <ClCompile Include="State_Declaration.cpp" />
+    <ClCompile Include="State_ID.cpp" />
+    <ClCompile Include="State_Specification.cpp" />
+    <ClCompile Include="Subtraction_Expression.cpp" />
+    <ClCompile Include="Symbol_Component_List.cpp" />
+    <ClCompile Include="System_Call_Expression.cpp" />
+    <ClCompile Include="Transfer_Statement.cpp" />
+    <ClCompile Include="Type_Aggregate.cpp" />
+    <ClCompile Include="Type_Bool.cpp" />
+    <ClCompile Include="Type_Double.cpp" />
+    <ClCompile Include="Type_Factory.cpp" />
+    <ClCompile Include="Type_Int.cpp" />
+    <ClCompile Include="Type_Routine.cpp" />
+    <ClCompile Include="Type_Routine_Variable_Args.cpp" />
+    <ClCompile Include="Type_String.cpp" />
+    <ClCompile Include="Type_Syntax.cpp" />
+    <ClCompile Include="Type_Void.cpp" />
+    <ClCompile Include="Unary_Expression.cpp" />
+    <ClCompile Include="Unary_Filter_Specification.cpp" />
+    <ClCompile Include="Unary_Negate_Expression.cpp" />
+    <ClCompile Include="Unary_Not_Expression.cpp" />
+    <ClCompile Include="Unary_Operator_Expression.cpp" />
+    <ClCompile Include="Value_Expression.cpp" />
+    <ClCompile Include="Variable_Reference_Symbol.cpp" />
+    <ClCompile Include="Variable_Symbol.cpp" />
+    <ClCompile Include="Void_Empty_Expression.cpp" />
+    <ClCompile Include="Wrangler_Filter.cpp" />
+    <ClCompile Include="Wrangler_Function.cpp" />
+    <ClCompile Include="Wrangler_Rules_Parser.cpp" />
+    <ClCompile Include="Rule_Parser.cc" />
+    <ClCompile Include="rule_parsing_unit.cc">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4800;4706;4512;4290;4996;4510;4511;4250;4127;4065;4244;4702;4005;4267</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Rule_Lexer.l" />
+    <None Include="parser.y" />
+    <None Include="rule_parsing_unit.output" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

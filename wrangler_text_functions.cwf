@@ -1,0 +1,35 @@
+State: NEW;
+State: SENT;
+State: RECIEVED;
+State: UNREAD;
+State: READ;
+State: HIDDEN;
+State: ACTIVE;
+State: INACTIVE;
+
+
+//Functions to override
+
+<bool,string> on_message_send(string).
+<> on_message_recieved(string).
+<> process();
+
+//Wrangler Directives
+
+//Automatically Unhides Contact
+<> deliver_message(string);
+
+
+<> send_message(string);
+<> delayed_task(code_block, seconds);
+<> add_state(State);
+<> remove_state(State);
+<> hide_contact();
+<> keep_state();
+
+//Variables
+%NOW //The current time
+
+
+
+

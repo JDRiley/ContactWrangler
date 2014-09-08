@@ -1,0 +1,16 @@
+﻿Build started 10/27/2013 6:35:00 PM.
+     1>Project "J:\JoMike Library\J_Math\J_Math.vcxproj" on node 6 (Build target(s)).
+     1>ClCompile:
+         J:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX /sdl /Od /Oy- /D _SCL_SECURE_NO_WARNINGS /D WIN32 /D _UNICODE /D UNICODE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /wd4512 /wd4290 /wd4250 /wd4996 /analyze- /errorReport:prompt Data_File.cpp j_math.cpp
+         j_math.cpp
+         Data_File.cpp
+         Generating Code...
+       Lib:
+         J:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"..\lib\J_Math32_D.lib" /NOLOGO Debug\Data_File.obj
+         Debug\j_math.obj
+         J_Math.vcxproj -> J:\JoMike Library\J_Math\..\lib\J_Math32_D.lib
+     1>Done Building Project "J:\JoMike Library\J_Math\J_Math.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.47

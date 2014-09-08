@@ -1,0 +1,11 @@
+﻿Build started 10/28/2013 3:38:19 AM.
+     1>Project "J:\JoMike Library\J_String\J_String.vcxproj" on node 6 (Build target(s)).
+     1>ClCompile:
+         J:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt J_String.cpp
+         J_String.cpp
+     1>j:\jomike library\j_ui\j_image\../../J_Utile/J_Fwd_Decl.h(17): error C2338: No VLD Found
+     1>Done Building Project "J:\JoMike Library\J_String\J_String.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.24

@@ -1,0 +1,18 @@
+﻿Build started 12/7/2013 9:44:05 PM.
+     1>Project "J:\JoMike Library\J_Camera_Socket_Interface\J_Utile\J_Utile.vcxproj" on node 6 (Build target(s)).
+     1>ClCompile:
+         J:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /IJ:\Intel\PCSDK\include /I"J:\JoMike Library\J_Camera_Socket_Interface\include" /Zi /nologo /W4 /WX /sdl /MP /Od /D _DEBUG /D _USRDLL /D WIN64 /D _WIN32_WINNT=0x0502 /D WIN32 /D NOMINMAX /D _UNICODE /D UNICODE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug2012\\" /Fd"x64\Debug2012\vc110.pdb" /Gd /TP /wd4800 /wd4706 /wd4512 /wd4290 /wd4996 /wd4510 /wd4511 /wd4250 /errorReport:prompt J_Utile.cpp
+         J_Utile.cpp
+         J:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /IJ:\Intel\PCSDK\include /I"J:\JoMike Library\J_Camera_Socket_Interface\include" /Zi /nologo /W4 /WX /sdl /MP /Od /D _DEBUG /D _USRDLL /D WIN64 /D _WIN32_WINNT=0x0502 /D WIN32 /D NOMINMAX /D _UNICODE /D UNICODE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug2012\\" /Fd"x64\Debug2012\vc110.pdb" /Gd /TP /wd4800 /wd4706 /wd4512 /wd4290 /wd4996 /wd4510 /wd4511 /wd4250 /errorReport:prompt j_type.cpp
+         j_type.cpp
+       Lib:
+         J:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\Lib.exe /OUT:"../lib/J_Utile_D.lib" /NOLOGO /MACHINE:X64 x64\Debug2012\J_Error.obj
+         x64\Debug2012\j_limits.obj
+         x64\Debug2012\J_Utile.obj
+         x64\Debug2012\j_type.obj
+         J_Utile.vcxproj -> J:\JoMike Library\J_Camera_Socket_Interface\J_Utile\../lib/J_Utile_D.lib
+     1>Done Building Project "J:\JoMike Library\J_Camera_Socket_Interface\J_Utile\J_Utile.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.91

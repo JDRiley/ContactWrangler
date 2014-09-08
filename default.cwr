@@ -1,0 +1,79 @@
+State: MEETUP {int time_set, int time};
+State: DOUBLE_SENT;
+State: REDEMPTION; //State for when time runs out and you are trying to redeem situation.
+State: PENDING_RECEIVE;
+
+Filter: F_SMILEY {has: ":)", ":-)", ":/", ":-D", ":-/", "u_u"
+	, ":-X", ":x", ":-x", ":p", ":)", ":(", "):", "(:"};
+Filter: F_DEFAULT {!F_SMILEY && !{has: "!"}};
+Filter: F_ASTERIK {has: "*"};
+
+
+In State PENDING_RECEIVE:
+<bool, string> on_message_send(string message){
+	transfer {<false, "Pending incoming message from this contact. Cannot Send">};
+}
+
+In State REDEMPTION:
+<bool, string> on_message_send(string message){
+	//Call The Normal on_message_send.
+	
+	transfer on_message_send<*>(message);
+	
+}
+
+In State DOUBLE_SENT:
+<bool, string> on_message_send(string message){
+	#hide_contact();
+	transfer {<false, "Cannot Triple send message. Hiding Contact">};
+}
+
+In State SENT:
+<bool, string> on_message_send(string message){
+	<bool, string> failure_value <- {<false, "Cannot double send in default rule">};
+	if(!F_ASTERIK(message)){
+		transfer failure_value;
+	}else if(message.size() > 20){
+		transfer failure_value;
+	}else{
+		#add_state(DOUBLE_SENT);
+		#deliver_message(message);
+	}
+}
+
+In State MEETUP:
+<> on_message_recieved(string message){
+	if(in_timeframe(MEETUP.time, <hours>(3), %NOW)){ 
+		#deliver_message(message);
+	}else{
+		on_message_recieved<*>(message);
+	}
+}
+
+In State HIDDEN:
+<> process(){
+	#keep_state();
+	if(<days>(time_since_last_message()) > 14){
+		#unhide_contact();
+	} 
+}
+
+
+In State *:
+<bool,string> on_message_send(string message){
+	if(F_DEFAULT(message)){
+		transfer true;
+	}else{
+		transfer {<false
+		, "Sent Messages Cannot have Smiley's or exclamation points. violates rule: " 
+		+ ${F_DEFAULT}>};
+	}
+}
+
+<> on_message_recieved(string message){
+	#set_state(PENDING_RECEIVE);
+	#delayed_task({#deliver_message(message).}, <seconds>(1*60 + random()%120));
+}
+
+
+

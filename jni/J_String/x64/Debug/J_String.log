@@ -1,0 +1,13 @@
+﻿Build started 9/5/2014 12:09:16 AM.
+     1>Project "J:\Java Studio\AndroidMaster\ContactWrangler\jni\J_String\J_String.vcxproj" on node 4 (Build target(s)).
+     1>ClCompile:
+         J:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\include\ /Zi /nologo /W4 /WX /sdl /MP /Od /D VS_2013 /D WIN32 /D VS_2013 /D _DEBUG /D _USRDLL /D WIN64 /D _WIN32_WINNT=0x0502 /D WIN32 /D NOMINMAX /D _UNICODE /D UNICODE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /wd4800 /wd4706 /wd4512 /wd4290 /wd4996 /wd4510 /wd4511 /wd4250 /errorReport:prompt J_String.cpp
+         J_String.cpp
+       Lib:
+         J:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\Lib.exe /OUT:"..\lib\J_String_D.lib" /NOLOGO /MACHINE:X64 x64\Debug\J_String.obj
+         J_String.vcxproj -> J:\Java Studio\AndroidMaster\ContactWrangler\jni\J_String\..\lib\J_String_D.lib
+     1>Done Building Project "J:\Java Studio\AndroidMaster\ContactWrangler\jni\J_String\J_String.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.97
