@@ -13,7 +13,7 @@ public:
 
 
 	Call_Expression(
-		const j_expression& irk_base_expression
+		j_expression* irk_base_expression
 		, J_Symbol_Identifier* i_identifier, Arguments* i_args_list);
 
 	Call_Expression(

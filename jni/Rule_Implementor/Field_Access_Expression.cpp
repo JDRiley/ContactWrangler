@@ -7,15 +7,28 @@ namespace jomike{
 
 J_FWD_DECL(J_Symbol_Identifier)
 
-Field_Access_Expression::Field_Access_Expression(J_Symbol_Identifier* i_name)
+Field_Access_Expression::Field_Access_Expression(
+J_Symbol_Identifier* i_name, j_expression* i_base_expression)
 :j_expression(Symbol_Types::EXPRESSION_TYPE_UNINITIALIZED){
 
 	assert(i_name);
 	M_identifier = i_name;
+	M_base_expression = i_base_expression;
 }
 
 Field_Access_Expression::Field_Access_Expression(const Field_Access_Expression& irk_source) : j_expression(irk_source){
 	M_identifier = irk_source.M_identifier->get_copy();
+	if(irk_source.M_base_expression){
+		M_base_expression = irk_source.M_base_expression->get_copy();
+	}
+}
+
+Field_Access_Expression::Field_Access_Expression(Field_Access_Expression&& irv_src)
+	: j_expression(std::move(irv_src)){
+	M_identifier = irv_src.M_identifier->move_copy();
+	if(irv_src.M_base_expression){
+		M_base_expression = irv_src.M_base_expression->move_copy();
+	}
 }
 
 j_value Field_Access_Expression::derived_get_value(const Arguments& i_args)const {

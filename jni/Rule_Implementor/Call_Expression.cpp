@@ -69,6 +69,15 @@ Call_Expression::Call_Expression(
 
 }
 
+Call_Expression::Call_Expression(
+	j_expression* irk_base_expression, J_Symbol_Identifier* i_identifier, Arguments* i_args_list)
+:j_expression(Symbol_Types::EXPRESSION_TYPE_UNINITIALIZED){
+	M_base_expression = irk_base_expression;
+	M_identifier = i_identifier;
+	M_args_list = i_args_list;
+
+}
+
 Call_Expression::~Call_Expression(){
 	delete M_identifier;
 	delete M_args_list;

@@ -79,10 +79,12 @@
 #include "System_Call_Expression.h"
 #include "Unary_Not_Expression.h"
 #include "Filter_Call_Expression.h"
+#include "Lambda_Expression.h"
+#include "Modulo_Expression.h"
 
 
 /* Line 33 of lalr1.cc  */
-#line 86 "rule_parsing_unit.hh"
+#line 88 "rule_parsing_unit.hh"
 
 
 #include <string>
@@ -98,7 +100,7 @@
 
 namespace yy {
 /* Line 33 of lalr1.cc  */
-#line 102 "rule_parsing_unit.hh"
+#line 104 "rule_parsing_unit.hh"
 
   /// A Bison parser.
   class Rule_Parsing_Unit
@@ -132,27 +134,29 @@ namespace yy {
      T_ELSE = 270,
      T_LEFT_ARROW = 271,
      T_RIGHT_ARROW = 272,
-     T_END = 273,
-     T_AGGREGATE_OPEN = 274,
-     T_AGGREGATE_CLOSE = 275,
-     T_IDENTIFIER = 276,
-     T_UPPERCASE_IDENTIFIER = 277,
-     T_FILTER_NAME = 278,
-     T_SYSTEM_IDENTIFIER = 279,
-     T_STRING_CONSTANT = 280,
-     T_INTEGER_CONSTANT = 281,
-     T_DOUBLE_CONSTANT = 282,
-     T_BOOL_CONSTANT = 283,
-     T_OR = 284,
-     T_AND = 285,
-     T_NOT_EQUAL = 286,
-     T_EQUAL = 287,
-     T_GREATER_EQUAL = 288,
-     T_LESS_EQUAL = 289,
-     T_DECREMENT = 290,
-     T_INCREMENT = 291,
+     T_EMPTY_TYPE_AGGREGATE = 273,
+     T_END = 274,
+     T_AGGREGATE_OPEN = 275,
+     T_AGGREGATE_CLOSE = 276,
+     T_IDENTIFIER = 277,
+     T_UPPERCASE_IDENTIFIER = 278,
+     T_FILTER_NAME = 279,
+     T_SYSTEM_IDENTIFIER = 280,
+     T_OVERRIDEN_FUNCTION = 281,
+     T_STRING_CONSTANT = 282,
+     T_INTEGER_CONSTANT = 283,
+     T_DOUBLE_CONSTANT = 284,
+     T_BOOL_CONSTANT = 285,
+     T_OR = 286,
+     T_AND = 287,
+     T_NOT_EQUAL = 288,
+     T_EQUAL = 289,
+     T_GREATER_EQUAL = 290,
+     T_LESS_EQUAL = 291,
      NEGATION = 292,
-     T_DIMENSIONS = 293
+     T_DECREMENT = 293,
+     T_INCREMENT = 294,
+     T_DIMENSIONS = 295
    };
 
     };
@@ -254,10 +258,10 @@ namespace yy {
     /// - if positive, shift that token.
     /// - if negative, reduce the rule which number is the opposite.
     /// - if zero, do what YYDEFACT says.
-    static const unsigned char yytable_[];
+    static const short int yytable_[];
     static const signed char yytable_ninf_;
 
-    static const unsigned char yycheck_[];
+    static const short int yycheck_[];
 
     /// For a state, its accessing symbol.
     static const unsigned char yystos_[];
@@ -329,7 +333,7 @@ namespace yy {
 
 } // yy
 /* Line 33 of lalr1.cc  */
-#line 333 "rule_parsing_unit.hh"
+#line 337 "rule_parsing_unit.hh"
 
 
 

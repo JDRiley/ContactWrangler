@@ -55,7 +55,7 @@ BEG_STRING        (\"[^"\n]*)
 STRING            ({BEG_STRING}\")
 UPPERCASE_IDENTIFIER ([A-Z][A-Z_0-9]*)
 IDENTIFIER        ([a-zA-Z][a-zA-Z_0-9]*)
-OPERATOR          ([-+/*%=.,;!<>()[\]{}\?\:])
+OPERATOR          ([-+/*%=.,;!<>()[\]{}\?\:$])
 BEG_COMMENT       ("/*")
 END_COMMENT       ("*/")
 SINGLE_COMMENT    ("//"[^\n]*)
@@ -110,7 +110,7 @@ SINGLE_COMMENT    ("//"[^\n]*)
 "->"                { MANAGE_LOC return token_t::T_RIGHT_ARROW;			}
 "{<"		    { MANAGE_LOC return token_t::T_AGGREGATE_OPEN;		}		
 ">}"		    { MANAGE_LOC return token_t::T_AGGREGATE_CLOSE;		}
-
+"<>"		    { MANAGE_LOC return token_t::T_EMPTY_TYPE_AGGREGATE;	}
 
 
 
@@ -160,6 +160,11 @@ SINGLE_COMMENT    ("//"[^\n]*)
 
 
  /* -------------------- Identifiers --------------------------- */
+
+"on_message_send"   {yylval->identifier = new J_Symbol_Identifier(std::string(yytext));
+				 MANAGE_LOC return token_t::T_OVERRIDEN_FUNCTION;	}
+"on_message_recieved"   {yylval->identifier = new J_Symbol_Identifier(std::string(yytext));
+				 MANAGE_LOC return token_t::T_OVERRIDEN_FUNCTION;	}
 
 F_{UPPERCASE_IDENTIFIER} {yylval->identifier = new J_Symbol_Identifier(std::string(yytext));
 						MANAGE_LOC return token_t::T_FILTER_NAME; }

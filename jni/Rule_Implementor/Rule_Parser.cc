@@ -156,6 +156,7 @@ void yy::Rule_Parsing_Unit::error(const location_type& irk_loc, const std::strin
 	for(const char* const * f_token = yytname_; *f_token; ++f_token){
 		tokens.push_back(*f_token);
 	}
+
 	throw jtl::J_Syntax_Error(o_str.str());
 }
 

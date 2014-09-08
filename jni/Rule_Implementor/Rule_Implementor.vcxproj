@@ -201,7 +201,9 @@
     <ClInclude Include="J_Symbol_Scope.h" />
     <ClInclude Include="j_unit.h" />
     <ClInclude Include="j_value.h" />
+    <ClInclude Include="Lambda_Expression.h" />
     <ClInclude Include="math_base.h" />
+    <ClInclude Include="Modulo_Expression.h" />
     <ClInclude Include="Multiplication_Expression.h" />
     <ClInclude Include="Negated_Filter_Specification.h" />
     <ClInclude Include="Operators.h" />
@@ -297,7 +299,9 @@
     <ClCompile Include="j_unit.cpp" />
     <ClCompile Include="j_value.cpp" />
     <ClCompile Include="J_Value_Types.cpp" />
+    <ClCompile Include="Lambda_Expression.cpp" />
     <ClCompile Include="math_base.cpp" />
+    <ClCompile Include="Modulo_Expression.cpp" />
     <ClCompile Include="Multiplication_Expression.cpp" />
     <ClCompile Include="Negated_Filter_Specification.cpp" />
     <ClCompile Include="Pre_Decrement_Expression.cpp" />

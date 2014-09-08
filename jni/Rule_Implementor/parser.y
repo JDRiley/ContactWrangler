@@ -93,6 +93,8 @@ j_symbol_component* jtl::g_input_line = nullptr;
 #include "System_Call_Expression.h"
 #include "Unary_Not_Expression.h"
 #include "Filter_Call_Expression.h"
+#include "Lambda_Expression.h"
+#include "Modulo_Expression.h"
 }
 
 /* The section before the first %% is the Definitions section of the yacc
@@ -127,11 +129,12 @@ j_symbol_component* jtl::g_input_line = nullptr;
 %token							T_VOID T_BOOL T_INT T_DOUBLE T_STRING
 %token							T_FILTER T_HAS T_TRANSFER T_STATE
 %token							T_NULL_PTR T_IN T_IF T_ELSE
-%token							T_LEFT_ARROW T_RIGHT_ARROW
+%token							T_LEFT_ARROW T_RIGHT_ARROW T_EMPTY_TYPE_AGGREGATE
 %token							T_END T_AGGREGATE_OPEN T_AGGREGATE_CLOSE
 %token	<identifier>			T_IDENTIFIER T_UPPERCASE_IDENTIFIER T_FILTER_NAME T_SYSTEM_IDENTIFIER
+%token	<identifier>			T_OVERRIDEN_FUNCTION
 %token	<string_constant>		T_STRING_CONSTANT  
-%token	<constant_symbol>		T_INTEGER_CONSTANT
+%token	<constant_symbol>		T_INTEGER_CONSTANT 
 %token	<constant_symbol>		T_DOUBLE_CONSTANT
 %token	<constant_symbol>		T_BOOL_CONSTANT
 
@@ -140,16 +143,17 @@ j_symbol_component* jtl::g_input_line = nullptr;
 %left T_OR
 %left   T_AND
 %left T_EQUAL T_NOT_EQUAL
-%left   T_LESS_EQUAL T_GREATER_EQUAL  '>' '<'
+%nonassoc   T_LESS_EQUAL T_GREATER_EQUAL  '>' '<'
 
 %left '+' '-'
 
 %left '*' '/' '%'
 
-%nonassoc '!' NEGATION T_INCREMENT T_DECREMENT
+%nonassoc '!' NEGATION 
+%nonassoc T_INCREMENT T_DECREMENT
 
 %left '.'
-%nonassoc '[' ']'
+%nonassoc '[' 
 %left T_DIMENSIONS
 
 /* Non-terminal types
@@ -164,10 +168,15 @@ j_symbol_component* jtl::g_input_line = nullptr;
 * pp2: You'll need to add many of these of your own.
 */
 
-%type	<arguments>	Expression_List Expression_List_Helper Expression_List_Wild
-%type	<expression>		Expression Call Field_Access_Expression LValue Aggregate_Value
-%type	<expression>		Assignment_Expression Test_Expression Expression_Wild
+%type	<identifier>		Identifier
+%type	<expression>		Assignment_Expression Expression Test_Expression
 %type	<constant_symbol>	Constant_Expression
+%type	<arguments>	Expression_List Expression_List_Helper Expression_List_Wild
+%type	<expression>		Expression_Wild 
+%type	<expression>		Call Lambda_Expression
+%type	<expression>		LValue
+%type	<expression>		Field_Access_Expression
+%type	<expression>		Aggregate_Value 
 %type	<declaration>		Declaration Variable_Declaration Routine_Definition
 %type	<type_syntax>		Type
 %type	<symbol_list>		Statement_List
@@ -209,7 +218,7 @@ State_Declaration_List
 	$$->add_symbol($2);
 	@$;
 }
-
+;
 State_Declaration
 : T_STATE ':' T_UPPERCASE_IDENTIFIER ';'{
 	$$ = new State_Declaration($3);
@@ -228,7 +237,7 @@ State_Specification_List
 	$$ = $1;
 	$$->add_symbol($2);
 }
-
+;
 
 State_Specification
 : T_IN T_STATE State_ID ':' Declaration_List{
@@ -243,7 +252,7 @@ State_Members
 : '{' Declaration_List '}' {
 	$$ = $2;
 }
-
+;
 
 Filter_List
 : /*empty*/ {
@@ -289,7 +298,7 @@ String_List
 	$$ = $1;
 	$$->add_symbol($3);
 }
-
+;
 
 State_ID
 : T_UPPERCASE_IDENTIFIER {
@@ -298,6 +307,8 @@ State_ID
 | '*'{
 	$$ = new State_ID(new J_Symbol_Identifier("*"));
 }
+;
+
 Statement
 : Expression ';' {
 	$$ = new Expression_Statement($1);
@@ -377,9 +388,20 @@ Routine_Definition
 	$1.destroy();
 	$3.destroy();
 }
+| Type T_OVERRIDEN_FUNCTION Bracketed_Declaration_List Statement_Block{
+	std::unique_ptr<Declaration_List> decl_list(new Declaration_List);
+
+	$$ = new Custom_Routine_Symbol($2, *decl_list, *$3, $1, $4);
+	$1.destroy();
+	$3.destroy();
+}
 ;
 
-
+Lambda_Expression
+: /*Nameless*/ '[' Declaration_List ']' Statement_Block{
+	$$ = new Lambda_Expression($2, $4);
+}
+;
 
 Bracketed_Declaration_List
 : '(' Declaration_List ')' {
@@ -417,13 +439,13 @@ Type
 | '<' Type_Syntax_List '>' {
 	$$ = new Type_Aggregate($2);
 }
+| T_EMPTY_TYPE_AGGREGATE{
+	$$ = make_void_type_syntax();
+}
 ;
 
 Type_Syntax_List
-: /*empty*/ {
-	$$ = new Type_Syntax_List;
-}
-| Type{
+: Type{
 	$$ = new Type_Syntax_List;
 	$$->add_symbol($1);
 }
@@ -432,12 +454,21 @@ Type_Syntax_List
 	$$->add_symbol($3);
 }
 ;
+
+
+Expression_Wild
+: /*empty*/{
+	$$ = new Void_Empty_Expression;
+}
+| Expression{
+	$$ = $1;
+}
+;
+
+
+
 Expression
 : Assignment_Expression{
-	$$ = $1;
-	
-}
-| Call{
 	$$ = $1;
 	
 }
@@ -446,9 +477,15 @@ Expression
 }
 | LValue {
 	$$ = $1;
+}
+| Call{
+	$$ = $1;
 	
 }
 | Aggregate_Value{
+	$$ = $1;
+}
+| Lambda_Expression{
 	$$ = $1;
 }
 | Expression '+' Expression { 
@@ -464,17 +501,17 @@ Expression
 	
 	
 }
+| Expression '%' Expression { 
+	$$ = new Modulo_Expression($1, $3);
+	
+	
+}
 | Expression '/' Expression { 
 	$$ = new Division_Expression($1, $3);
 	
 	
 }
-| T_INCREMENT LValue{
-	$$ = new Pre_Increment_Expression($2);
-}
-| T_DECREMENT LValue{
-	$$ = new Pre_Decrement_Expression($2);
-}
+
 | Expression '>' Expression{
 	$$ = new Relational_Binary_Expression($1, $3, Operators::GREATER);
 }
@@ -499,22 +536,25 @@ Expression
 | Expression T_NOT_EQUAL Expression{
 	$$ = new Relational_Binary_Expression($1, $3, Operators::NOT_EQUAL);
 }
-| '(' Expression ')' {$$ = $2;  }
-| '-' Expression{
-	$$ = new Unary_Negate_Expression($2);
-}
+
 | '!' Expression{
 	$$ = new Unary_Not_Expression($2);
 }
+| '-' Expression %prec NEGATION{
+	$$ = new Unary_Negate_Expression($2);
+}
+| T_INCREMENT Expression{
+	$$ = new Pre_Increment_Expression($2);
+}
+| T_DECREMENT Expression{
+	$$ = new Pre_Decrement_Expression($2);
+}
+| '(' Expression ')' {
+	$$ = $2;
+}
+
 ;
 
-Expression_Wild
-: /*empty*/{
-	$$ = new Void_Empty_Expression;
-}
-| Expression{
-	$$ = $1;
-}
 
 Assignment_Expression
 : LValue T_LEFT_ARROW Expression {
@@ -523,34 +563,34 @@ Assignment_Expression
 }
 ;
 
-Aggregate_Value
-: T_AGGREGATE_OPEN Expression_List T_AGGREGATE_CLOSE{
-	$$ = new Aggregate_Value_Symbol(*$2);
-	$2.destroy();
-}
 LValue
-: /*Expression '[' Expression ']' {
-	$$ = new Array_Access_Expression(*$1, *$3, @$);
-	delete_tokens($1, $3);
+:  Field_Access_Expression {
+	$$ = $1;
 }
-| */Field_Access_Expression {$$ = $1; }
 ;
+
 Field_Access_Expression
 : T_IDENTIFIER {
 	$$ = new Field_Access_Expression($1);
 	
 }
-/*| Expression T_BACKSLASH T_Identifier {
-	$$ = new Field_Access_Expression($1, *$3);
-	delete_tokens($3);
-}*/
+| T_UPPERCASE_IDENTIFIER{
+	$$ = new Field_Access_Expression($1);
+}
+| Expression '.' T_IDENTIFIER %prec '.'{
+	$$ = new Field_Access_Expression($3, $1);
+	$3.destroy();
+}
+| T_SYSTEM_IDENTIFIER{
+	$$ = new Field_Access_Expression($1);
+}
 ;
 
 Call
 : T_IDENTIFIER '(' Expression_List_Wild ')' {
 	$$ = new Call_Expression($1, $3);
 }
-| T_IDENTIFIER '<' State_ID '>' '(' Expression_List_Wild ')'{
+| T_OVERRIDEN_FUNCTION '<' State_ID '>' '(' Expression_List_Wild ')'{
 	$$ = new Call_Expression($1, $3, $6);
 }
 | T_SYSTEM_IDENTIFIER '(' Expression_List_Wild ')' {
@@ -559,14 +599,21 @@ Call
 | T_FILTER_NAME '(' Expression_List_Wild ')' {
 	$$ = new Filter_Call_Expression($1, $3);
 }
+| Expression '.' T_IDENTIFIER '(' Expression_List_Wild ')' {
+	$$ = new Call_Expression($1, $3, $5);
+}
 ;
 
-//| Expression T_BACKSLASH T_IDENTIFIER '(' Expression_List_Wild ')' {
-//	$$ = new Call_Expression(*$1, $3, $5);
-//	delete_tokens($1, $5);
-//	delete $3;
-//}
+
+Aggregate_Value
+: T_AGGREGATE_OPEN Expression_List T_AGGREGATE_CLOSE{
+	$$ = new Aggregate_Value_Symbol(*$2);
+	$2.destroy();
+}
 ;
+
+
+
 
 Expression_List_Wild
 :	/*empty*/ {$$ = new Arguments;}
@@ -600,9 +647,23 @@ Constant_Expression
 | T_DOUBLE_CONSTANT{$$ = $1;}
 | T_BOOL_CONSTANT{$$ = $1;  }
 | T_STRING_CONSTANT{$$ = $1; }
+| '$' '{' Identifier '}' {
+	$$ = new String_Constant_Symbol($3->identifier_name(), @$);
+	$3.destroy();
+}
 ;
 
-
+Identifier
+: T_IDENTIFIER{
+	$$ = $1;
+}
+| T_UPPERCASE_IDENTIFIER{
+	$$ = $1;
+}
+| T_FILTER_NAME{
+	$$ = $1;
+}
+;
 %%
 
 /* The closing %% above marks the end of the Rules section and the beginning

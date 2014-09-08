@@ -33,10 +33,15 @@ State_Specification::State_Specification(
 }
 
 State_Specification::State_Specification(
-	const State_Specification& irk_source):j_symbol_component(irk_source){
+	const State_Specification& irk_source):j_symbol_component(irk_source), M_routines(irk_source.M_routines){
 	M_state_id = irk_source.state_id().get_copy();
 
 
+}
+
+State_Specification::State_Specification(State_Specification&& irv_src)
+:j_symbol_component(std::move(irv_src)), M_routines(std::move(irv_src.M_routines)){
+	M_state_id = irv_src.state_id().get_copy();
 }
 
 

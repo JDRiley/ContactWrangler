@@ -831,8 +831,53 @@ j_value operator!=(const j_value& irk_left, const j_value& irk_right){
 	return j_value(left_val.as_bool(), J_Unit());
 }
 
+class Modulo_Class{
+public:
+	template<typename Ret_t, typename Left_t, typename Right_t>
+	void operator()(const Left_t& i_left, const Right_t& i_right, Ret_t* i_destination)const{
+		*i_destination = static_cast<Ret_t>(i_left % i_right);
+	}
+};
 
 
+
+j_value operator%(const j_value& irk_left, const j_value& irk_right){
+	j_value left_val(irk_left);
+
+	left_val.binary_value_operation_llint(irk_right, Modulo_Class());
+
+	return j_value(left_val.as_bool(), J_Unit());
+}
+
+template<typename Operator_Class>
+void j_value::binary_value_operation_llint(
+	const j_value& i_right, const Operator_Class& i_func){
+
+	j_value right_val(i_right);
+
+	if(type() != right_val.type()){
+		convert_to_same_type(this, &right_val);
+	}
+
+
+
+
+	switch(M_type){
+	case Value_Types::LL_INTEGER:
+		binary_value_operation(
+			M_val.llint_val, i_right, &M_val.llint_val, i_func);
+		break;
+	case Value_Types::DOUBLE:
+		throw J_Value_Error("Double in wrong binary value_operation function");
+	case Value_Types::BOOL:
+		throw J_Value_Error("Bool in wrong binary value_operation function");
+	case Value_Types::STRING:
+		throw J_Value_Error("String in wrong binary value_operation function");
+	default:
+		assert(!"Unhandled Value Type");
+	}
+
+}
 }
 
 

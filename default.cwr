@@ -43,7 +43,7 @@ In State SENT:
 
 In State MEETUP:
 <> on_message_recieved(string message){
-	if(in_timeframe(MEETUP.time, <hours>(3), %NOW)){ 
+	if(in_timeframe(MEETUP.time, hours(3), #NOW)){ 
 		#deliver_message(message);
 	}else{
 		on_message_recieved<*>(message);
@@ -53,7 +53,7 @@ In State MEETUP:
 In State HIDDEN:
 <> process(){
 	#keep_state();
-	if(<days>(time_since_last_message()) > 14){
+	if(days(time_since_last_message()) > 14){
 		#unhide_contact();
 	} 
 }
@@ -68,11 +68,11 @@ In State *:
 		, "Sent Messages Cannot have Smiley's or exclamation points. violates rule: " 
 		+ ${F_DEFAULT}>};
 	}
-}
+} , //This , is needed to parse declaration lists
 
 <> on_message_recieved(string message){
 	#set_state(PENDING_RECEIVE);
-	#delayed_task({#deliver_message(message).}, <seconds>(1*60 + random()%120));
+	#delayed_task([]{#deliver_message(message);}, seconds(1*60 + random()%120));
 }
 
 

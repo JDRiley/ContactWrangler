@@ -270,6 +270,12 @@
     <ClInclude Include="Filter_Call_Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lambda_Expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modulo_Expression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rule_Lexer.cpp">
@@ -498,6 +504,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Filter_Call_Expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lambda_Expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modulo_Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

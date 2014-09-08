@@ -11,7 +11,7 @@ public:
 	State_Specification(State_ID* i_state_id, const Declaration_List& i_declaration_list);
 
 	State_Specification(const State_Specification& irk_source);
-
+	State_Specification(State_Specification&& irv_src);
 	State_Specification* get_copy()const override;
 
 	State_Specification* move_copy()override;

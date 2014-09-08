@@ -54,7 +54,7 @@ void Rule_Implementor::add_state_specifications(
 
 
 			Wrangler_Function* wrangler_func;
-			if(M_wrangler_functions.count(routine->name())){
+			if(!M_wrangler_functions.count(routine->name())){
 				wrangler_func = M_wrangler_functions[routine->name()]
 					= new Wrangler_Function(new J_Symbol_Identifier(routine->name()));
 			} else{

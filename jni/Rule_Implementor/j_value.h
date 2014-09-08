@@ -21,7 +21,7 @@ j_value operator>(const j_value& irk_left, const j_value& irk_right);
 j_value operator>=(const j_value& irk_left, const j_value& irk_right);
 j_value operator==(const j_value& irk_left, const j_value& irk_right);
 j_value operator!=(const j_value& irk_left, const j_value& irk_right);
-
+j_value operator%(const j_value& irk_left, const j_value& irk_right);
 class j_value{
 public:
 	j_value();
@@ -153,6 +153,10 @@ private:
 	template<class Operator_Class>
 	void binary_value_operation_no_str_or_bool(
 		const j_value& i_right, const Operator_Class&);
+	
+	template<class Operator_Class>
+	void binary_value_operation_llint(
+		const j_value& i_right, const Operator_Class&);
 
 	template<class Operator_Class>
 	void binary_value_operation_no_str(
@@ -191,7 +195,7 @@ private:
 	friend j_value operator>=(const j_value& irk_left, const j_value& irk_right);
 	friend j_value operator==(const j_value& irk_left, const j_value& irk_right);
 	friend j_value operator!=(const j_value& irk_left, const j_value& irk_right);
-
+	friend j_value operator%(const j_value& irk_left, const j_value& irk_right);
 
 };
 
