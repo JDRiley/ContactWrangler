@@ -368,6 +368,7 @@
     <ClInclude Include="j_type.h" />
     <ClInclude Include="J_Utile.h" />
     <ClInclude Include="ordered_pair.h" />
+    <ClInclude Include="Stream_Checker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="J_Error.cpp" />
@@ -387,6 +388,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug2012|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="J_Utile.cpp" />
+    <ClCompile Include="Stream_Checker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

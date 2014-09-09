@@ -58,4 +58,15 @@ int generate_rule_parser(const string& irk_string){
 	return new_id;
 }
 
+std::string process_command(int implementation_handle, const std::string& irk_command){
+	if(!g_rule_implementors.count(implementation_handle)){
+		return "Error: Implementor: " + to_string(implementation_handle) + " Not Found!";
+	}
+
+
+	Rule_Implementor& implementor = **g_rule_implementors.find(implementation_handle);
+
+	return implementor.process_command(irk_command);
+}
+
 }

@@ -35,6 +35,9 @@ private:
 
 	Statement_Block* M_statement_block;
 	J_Symbol_Scope* M_running_scope;
+
+
+	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
 };
 
 //Class Thrown when transfer encountered
@@ -46,6 +49,8 @@ public:
 private:
 	j_value M_value;
 };
+
+
 
 }
 

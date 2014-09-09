@@ -5,6 +5,14 @@
 #include "Custom_Routine_Symbol.h"
 //
 #include "J_Symbol_Identifier.h"
+//
+#include <Stream_Checker.h>
+//
+#include "Arguments.h"
+//
+#include "Constant_Symbol.h"
+using std::string;
+
 namespace jomike{
 
 
@@ -26,6 +34,21 @@ public:
 	Implementation_Data& operator=(const Implementation_Data&) = delete;
 	Implementation_Data& operator=(Implementation_Data&&) = delete;
 
+	std::string process(Stream_Checker* ir_checker)const{
+		string arg_string;
+		ir_checker->consume_char('"');
+		ir_checker->getline_and_check(&arg_string, '"', "Arguments");
+		Arguments args;
+		args.push_back(new String_Constant_Symbol(arg_string, yy::location()));
+
+		return M_routine->get_wrangler_str_val(args);
+	}
+
+	const State_ID& state_id()const{
+		assert(M_state_id);
+		return *M_state_id;
+	}
+
 	~Implementation_Data(){
 		delete M_state_id;
 		delete M_routine;
@@ -43,6 +66,19 @@ Wrangler_Function::~Wrangler_Function(){
 	delete M_name;
 	M_implementations.apply([](Implementation_Data* y_data){delete y_data; });
 
+}
+
+std::string Wrangler_Function::process(const State_ID& ir_state, Stream_Checker* ir_checker)const{
+	for(auto f_impl : M_implementations){
+		if(!f_impl->state_id().matches(ir_state)){
+			continue;
+		}
+
+
+		return f_impl->process(ir_checker);
+	}
+
+	return "Error: Could Not find state for function: " + M_name->identifier_name();
 }
 
 

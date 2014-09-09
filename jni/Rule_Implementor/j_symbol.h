@@ -55,11 +55,13 @@ public:
 	j_symbol(const j_symbol& irk_symbol);
 	j_symbol(j_symbol&& irr_symbol);
 
-	virtual void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope);
+	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope);
 
-	virtual void process();
+	virtual void process(const Arguments& = empty_arguments());
 
 	virtual const Type_Syntax& return_type_syntax()const;
+
+	virtual std::string get_wrangler_str_val(const Arguments& irk_args);
 protected:
 	virtual j_value derived_get_value(const Arguments& i_args)const = 0;
 
@@ -73,6 +75,10 @@ private:
 	Arguments* M_arguments;
 	Type_Syntax* M_type = nullptr;
 	J_Symbol_Identifier* M_name;
+
+	virtual void alert_symbol_scope_set();
+
+	virtual std::string derived_get_wrangler_str_val(const Arguments& irk_args) = 0;
 };
 
 

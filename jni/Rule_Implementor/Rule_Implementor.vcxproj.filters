@@ -276,6 +276,12 @@
     <ClInclude Include="Modulo_Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="State_ID_Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrangler_Directive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rule_Lexer.cpp">
@@ -510,6 +516,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Modulo_Expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State_ID_Factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrangler_Directive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

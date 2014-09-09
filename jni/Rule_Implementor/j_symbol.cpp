@@ -53,6 +53,7 @@ extern const J_Symbol_Scope* gk_default_symbol_scope = default_symbol_scope();
 
 void j_symbol::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
 	M_symbol_scope = i_symbol_scope;
+	alert_symbol_scope_set();
 }
 
 j_symbol* j_symbol::get_symbol_from_scope(const string& irk_string)const{
@@ -218,8 +219,18 @@ const J_Symbol_Scope& j_symbol::symbol_scope()const{
 	return *M_symbol_scope;
 }
 
-void j_symbol::process(){
+void j_symbol::process(const Arguments& irk_args){
+	get_value(irk_args);
+}
 
+string j_symbol::get_wrangler_str_val(const Arguments& irk_args){
+	process(irk_args);
+	return derived_get_wrangler_str_val(irk_args);
+
+}
+
+std::string j_symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
 }
 
 const Arguments& empty_arguments(){

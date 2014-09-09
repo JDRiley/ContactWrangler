@@ -95,6 +95,7 @@ j_symbol_component* jtl::g_input_line = nullptr;
 #include "Filter_Call_Expression.h"
 #include "Lambda_Expression.h"
 #include "Modulo_Expression.h"
+#include "Wrangler_Directive.h"
 }
 
 /* The section before the first %% is the Definitions section of the yacc
@@ -594,7 +595,7 @@ Call
 	$$ = new Call_Expression($1, $3, $6);
 }
 | T_SYSTEM_IDENTIFIER '(' Expression_List_Wild ')' {
-	$$ = new System_Call_Expression($1, $3);
+	$$ = new Wrangler_Directive($1, $3);
 }
 | T_FILTER_NAME '(' Expression_List_Wild ')' {
 	$$ = new Filter_Call_Expression($1, $3);

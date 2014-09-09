@@ -4,7 +4,8 @@
 #include "Rule_Implementor.h"
 //
 #include <ex_array.h>
-
+//
+#include <Stream_Checker.h>
 namespace jomike{
 class Wrangler_Function{
 
@@ -25,6 +26,8 @@ public:
 
 	~Wrangler_Function();
 
+
+	std::string process(const State_ID& ir_state, Stream_Checker* ir_checker)const;
 private:
 	J_Symbol_Identifier* M_name;
 

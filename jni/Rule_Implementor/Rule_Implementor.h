@@ -17,7 +17,7 @@ public:
 	Rule_Implementor& operator=(const Rule_Implementor&) = delete;
 	Rule_Implementor& operator=(Rule_Implementor&&) = delete;
 
-
+	std::string process_command(const std::string& irk_command);
 	~Rule_Implementor();
 	
 private:

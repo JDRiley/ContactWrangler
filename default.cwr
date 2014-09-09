@@ -68,7 +68,7 @@ In State *:
 		, "Sent Messages Cannot have Smiley's or exclamation points. violates rule: " 
 		+ ${F_DEFAULT}>};
 	}
-} , //This , is needed to parse declaration lists
+} , //This ',' is needed to parse declaration lists
 
 <> on_message_recieved(string message){
 	#set_state(PENDING_RECEIVE);

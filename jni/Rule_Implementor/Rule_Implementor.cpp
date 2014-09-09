@@ -13,8 +13,17 @@
 #include "J_Symbol_Identifier.h"
 //
 #include "J_Symbol_Error.h"
+//
+#include <Stream_Checker.h>
+//
+#include <sstream>
+//
+#include "State_ID_Factory.h"
 using std::string;
 
+using std::istringstream;
+//
+#include "State_ID.h"
 namespace jomike{
 
 
@@ -65,6 +74,34 @@ void Rule_Implementor::add_state_specifications(
 
 		}
 	}
+
+}
+
+string Rule_Implementor::process_command(const string& irk_command){
+
+	Stream_Checker checker(irk_command);
+
+	checker.skip_string("State:", "State Data");
+
+	string input_string;
+
+	checker.getline_and_check(&input_string, ':',  "State ID");
+
+	
+
+
+	State_ID_Unique_t state_id(make_state_id(input_string));
+
+	string function_name;
+	checker.getline_and_check(&function_name, '(', "Function Name");
+
+	if(!M_wrangler_functions.count(function_name)){
+		return "Error: Function with name: " + function_name + " not found!";
+	}
+
+	Wrangler_Function* wrangler_func = *M_wrangler_functions.find(function_name);
+
+	return wrangler_func->process(*state_id, &checker);
 
 }
 

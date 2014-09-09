@@ -5,6 +5,10 @@
 #include "J_Symbol_Scope.h"
 //
 #include "J_Symbol_Error.h"
+//
+#include "Custom_Routine_Symbol.h"
+using std::string;
+
 namespace jomike{
 
 
@@ -54,21 +58,27 @@ jomike::j_value Symbol_Component_List::derived_get_value(const Arguments& i_args
 	}
 
 	J_Symbol_Scope new_scope(&symbol_scope());
-	for(auto symbol : M_components){
-		auto symbol_ptr = dynamic_cast<j_symbol*>(symbol);
-		if(symbol_ptr){
-			symbol_ptr->set_symbol_scope(&new_scope);
-			symbol_ptr->get_value();
+	j_value return_val = j_value(string(), J_Unit());
+	try{
+		for(auto symbol : M_components){
+			auto symbol_ptr = dynamic_cast<j_symbol*>(symbol);
+			if(symbol_ptr){
+				symbol_ptr->set_symbol_scope(&new_scope);
+				symbol_ptr->get_value();
+			}
+
 		}
-		
+	} catch(J_Routine_Transfer_Exception& e){
+		return_val += e.value();
 	}
+
 	auto last_symbol = dynamic_cast<j_symbol*>(M_components.back());
 
 	if(!last_symbol){
 		throw J_Value_Error("Trying to get value from non j_symbol type. ");
 	}
 
-	return  last_symbol->get_value();
+	return  return_val;
 }
 
 jomike::j_size_t Symbol_Component_List::size()const{

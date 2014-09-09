@@ -11,6 +11,7 @@ public:
 
 	State_ID* get_copy()const override;
 
+	bool matches(const State_ID& irk_right)const;
 
 	State_ID* move_copy()override;
 

@@ -16,6 +16,7 @@
 //
 #include "Statement_Block.h"
 using std::transform;
+using std::string;
 
 using std::to_string;
 namespace jomike{
@@ -96,6 +97,7 @@ j_value Custom_Routine_Symbol::derived_get_value(const Arguments& irk_args)const
 	M_statement_block->set_symbol_scope(running_scope.get());
 
 	j_value return_val;
+
 	try{
 		M_statement_block->process();
 	} catch(J_Routine_Transfer_Exception& e){
@@ -109,8 +111,12 @@ j_value Custom_Routine_Symbol::derived_get_value(const Arguments& irk_args)const
 	if(j_value::Value_Types::UNDEFINIED == return_val.type()){
 		throw J_Symbol_Error("Function Did Not Return A Value");
 	}
-	return return_type_syntax().convert_value(return_val);
+	return return_val;
 
+}
+
+string Custom_Routine_Symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/) {
+	return M_statement_block->get_wrangler_str_val(empty_arguments());
 }
 
 

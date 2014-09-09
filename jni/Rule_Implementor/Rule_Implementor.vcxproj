@@ -213,6 +213,7 @@
     <ClInclude Include="Rule_Data.h" />
     <ClInclude Include="State_Declaration.h" />
     <ClInclude Include="State_ID.h" />
+    <ClInclude Include="State_ID_Factory.h" />
     <ClInclude Include="State_Specification.h" />
     <ClInclude Include="System_Call_Expression.h" />
     <ClInclude Include="Transfer_Statement.h" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Unary_Filter_Specification.h" />
     <ClInclude Include="Unary_Not_Expression.h" />
     <ClInclude Include="Void_Empty_Expression.h" />
+    <ClInclude Include="Wrangler_Directive.h" />
     <ClInclude Include="Wrangler_Filter.h" />
     <ClInclude Include="Wrangler_Function.h" />
     <ClInclude Include="Wrangler_Rules_Parser.h" />
@@ -319,6 +321,7 @@
     <ClCompile Include="Statement_Block.cpp" />
     <ClCompile Include="State_Declaration.cpp" />
     <ClCompile Include="State_ID.cpp" />
+    <ClCompile Include="State_ID_Factory.cpp" />
     <ClCompile Include="State_Specification.cpp" />
     <ClCompile Include="Subtraction_Expression.cpp" />
     <ClCompile Include="Symbol_Component_List.cpp" />
@@ -343,6 +346,7 @@
     <ClCompile Include="Variable_Reference_Symbol.cpp" />
     <ClCompile Include="Variable_Symbol.cpp" />
     <ClCompile Include="Void_Empty_Expression.cpp" />
+    <ClCompile Include="Wrangler_Directive.cpp" />
     <ClCompile Include="Wrangler_Filter.cpp" />
     <ClCompile Include="Wrangler_Function.cpp" />
     <ClCompile Include="Wrangler_Rules_Parser.cpp" />

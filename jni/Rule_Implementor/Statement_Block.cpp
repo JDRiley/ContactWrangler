@@ -3,6 +3,8 @@
 #include "J_Symbol_Scope.h"
 //
 #include "Specific_Symbol_List.h"
+using std::string;
+
 namespace jomike{
 
 
@@ -52,6 +54,18 @@ void Statement_Block::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
 	j_statement::set_symbol_scope(i_symbol_scope);
 	M_symbol_list->set_symbol_scope(i_symbol_scope);
 }
+
+std::string Statement_Block::derived_get_wrangler_str_val(const Arguments& irk_args){
+	string return_val;
+
+	for(auto f_sym : *M_symbol_list){
+		return_val += f_sym->get_wrangler_str_val(irk_args);
+	}
+
+	return return_val;
+}
+
+
 
 }
 

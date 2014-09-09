@@ -28,11 +28,14 @@ public:
 	~Statement_Block();
 
 
+
 	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope)override;
 private:
 	Symbol_List* M_symbol_list;
 
 	j_value derived_get_value(const Arguments& i_args)const override;
+
+	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
 
 	
 };

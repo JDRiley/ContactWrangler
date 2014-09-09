@@ -18,6 +18,20 @@ State_ID::State_ID(J_Symbol_Identifier* i_identifier):j_symbol_component(Symbol_
 	M_state_id = i_identifier->identifier_name();
 }
 
+bool State_ID::matches(const State_ID& irk_right)const{
+
+	if(M_state_id == "*"){
+		return true;
+	}
+
+	if("*" == irk_right.M_state_id){
+		return true;
+	}
+
+	return M_state_id == irk_right.M_state_id;
+
+}
+
 }
 
 
