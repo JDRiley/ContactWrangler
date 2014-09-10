@@ -67,6 +67,7 @@ public:
 protected:
 	virtual j_value derived_get_value(const Arguments& i_args)const = 0;
 
+	const Arguments& arguments()const;
 
 	const J_Symbol_Scope& symbol_scope()const;
 

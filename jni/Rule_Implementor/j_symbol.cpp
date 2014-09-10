@@ -100,6 +100,10 @@ j_symbol::j_symbol(Symbol_Types i_symbol_type) : j_symbol_component(i_symbol_typ
 
 }
 
+const Arguments& j_symbol::arguments()const{
+	return *M_arguments;
+}
+
 j_symbol::j_symbol(const j_symbol& irk_symbol):j_symbol_component(irk_symbol){
 	if(irk_symbol.M_type){
 		M_type = irk_symbol.M_type->get_copy();

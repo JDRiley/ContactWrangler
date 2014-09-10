@@ -171,6 +171,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rules_Implementor_Tester.cpp" />
+    <ClCompile Include="Rule_Model.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="N_Ary_Function_Symbol.h" />
+    <ClInclude Include="Rule_Model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

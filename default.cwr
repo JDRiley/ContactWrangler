@@ -43,7 +43,7 @@ In State SENT:
 
 In State MEETUP:
 <> on_message_recieved(string message){
-	if(in_timeframe(MEETUP.time, hours(3), #NOW)){ 
+	if(between_inclusive(#NOW, MEETUP.time - 60*120, MEETUP.time + 60*120)){ 
 		#deliver_message(message);
 	}else{
 		on_message_recieved<*>(message);
@@ -73,6 +73,7 @@ In State *:
 <> on_message_recieved(string message){
 	#set_state(PENDING_RECEIVE);
 	#delayed_task({<[]{#deliver_message(message);}>}, 125 +20);
+
 }
 
 

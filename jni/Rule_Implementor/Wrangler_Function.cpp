@@ -66,6 +66,7 @@ Wrangler_Function::~Wrangler_Function(){
 	delete M_name;
 	M_implementations.apply([](Implementation_Data* y_data){delete y_data; });
 
+
 }
 
 std::string Wrangler_Function::process(const State_ID& ir_state, Stream_Checker* ir_checker)const{

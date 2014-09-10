@@ -1,5 +1,5 @@
-#ifndef RULE_MODEL_H
-#define RULE_MODEL_H
+#ifndef RULE_DATA_H
+#define RULE_DATA_H
 
 #include "Rule_Implementor_Fwd_Decl.h"
 //
@@ -35,6 +35,6 @@ private:
 
 }
 
-#endif //RULE_MODEL_H
+#endif //RULE_DATA_H
 
 

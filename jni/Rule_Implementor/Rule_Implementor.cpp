@@ -19,6 +19,7 @@
 #include <sstream>
 //
 #include "State_ID_Factory.h"
+
 using std::string;
 
 using std::istringstream;
@@ -27,10 +28,6 @@ using std::istringstream;
 namespace jomike{
 
 
-j_symbol* get_j_symbol_from_model(const string& irk_name){
-	
-	throw J_Symbol_Error("No Global Symbols in Rule Wrangler. Symbol: " + irk_name + " not found!");
-}
 
 Rule_Implementor::Rule_Implementor(
 	State_Specification_List* i_state_specifications, const Rule_Data& irk_rule_data){
@@ -88,7 +85,9 @@ string Rule_Implementor::process_command(const string& irk_command){
 
 	checker.getline_and_check(&input_string, ':',  "State ID");
 
-	
+	if(' ' == input_string.front()){
+		input_string.erase(input_string.begin());
+	}
 
 
 	State_ID_Unique_t state_id(make_state_id(input_string));
