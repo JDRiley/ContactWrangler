@@ -54,14 +54,27 @@ j_expression& Binary_Expression::left_expression()const{
 	return *M_left_expression;
 }
 
-void Binary_Expression::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
-	j_expression::set_symbol_scope(i_symbol_scope);
-	M_left_expression->set_symbol_scope(i_symbol_scope);
-	M_right_expression->set_symbol_scope(i_symbol_scope);
+void Binary_Expression::alert_symbol_scope_set(){
+
+	M_left_expression->set_symbol_scope(&symbol_scope());
+	M_right_expression->set_symbol_scope(&symbol_scope());
 }
 
 Operators Binary_Expression::operator_enum()const{
 	return M_operator;
+}
+
+std::string Binary_Expression::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	//Saying Binary strings do not operate on wrangler directives wrangler directives
+
+	//If a particular Binary Expression actually needs to return a wrangler command it can override
+	//this function
+	return "";
+}
+
+void Binary_Expression::process(const Arguments& irk_args){
+	left_expression().process(irk_args);
+	right_expression().process(irk_args);
 }
 
 

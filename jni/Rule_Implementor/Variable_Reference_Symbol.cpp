@@ -1,5 +1,6 @@
 #include "Variable_Reference_Symbol.h"
-
+//
+#include "j_expression.h"
 using std::string;
 
 namespace jomike{
@@ -45,6 +46,20 @@ Variable_Reference_Symbol::Variable_Reference_Symbol(
 	Type_Syntax* i_syntax, J_Symbol_Identifier* i_identifier, j_expression* i_expression)
 	: j_declaration(i_syntax, i_identifier){
 	M_expression = i_expression;
+}
+
+std::string Variable_Reference_Symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Variable_Reference_Symbol::alert_symbol_scope_set(){
+
+}
+
+void Variable_Reference_Symbol::process(const Arguments& irk_args){
+	if(M_expression){
+		M_expression->process(irk_args);
+	}
 }
 
 }

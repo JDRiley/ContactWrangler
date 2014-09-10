@@ -24,6 +24,8 @@ public:
 
 
 	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope);
+
+	void process(const Arguments& irk_args)override;
 protected:
 	Unary_Expression();
 	j_expression& base_expression();
@@ -37,7 +39,9 @@ private:
 
 	j_expression* M_expression;
 
+	void alert_symbol_scope_set()override;
 	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 
 };
 

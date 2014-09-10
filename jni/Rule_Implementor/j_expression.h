@@ -18,7 +18,12 @@ public:
 	j_expression* get_copy()const override = 0;
 
 	j_expression(const j_expression& irk_right);
+	j_expression(j_expression&& irv_src);
 
+
+
+	j_expression& operator=(const j_expression&) = delete;
+	j_expression& operator=(j_expression&&) = delete;
 	void clear(){
 		assert(0);
 	}
@@ -28,6 +33,7 @@ public:
 	std::string get_display_name()override;
 
 	
+	j_expression* make_non_referenced()const override;
 
 	~j_expression();
 

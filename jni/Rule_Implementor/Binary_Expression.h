@@ -25,9 +25,10 @@ public:
 
 	~Binary_Expression();
 
+	void process(const Arguments& irk_args)override;
 	
 
-	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope)override;
+	
 protected:
 	j_expression& left_expression()const;
 
@@ -42,6 +43,10 @@ private:
 	j_expression* M_left_expression;
 	j_expression* M_right_expression;
 	Operators M_operator;
+
+	void alert_symbol_scope_set()override;
+
+	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
 };
 }
 

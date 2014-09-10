@@ -23,13 +23,19 @@ public:
 
 	bool has_value()const;
 
-	j_symbol* make_non_referenced()const override;
+	j_expression* make_non_referenced()const override;
 
 	~Field_Access_Expression();
+
+	void process(const Arguments& irk_args)override;
 private:
-	J_Symbol_Identifier* M_identifier;
+
 	j_expression* M_base_expression;
 	j_value derived_get_value(const Arguments& i_args)const override;
+
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
 
 }

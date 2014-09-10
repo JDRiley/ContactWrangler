@@ -99,14 +99,30 @@ j_value If_Statement::derived_get_value(const Arguments& i_args)const {
 	}
 }
 
-void If_Statement::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
+void If_Statement::alert_symbol_scope_set(){
 	assert(M_test_expression);
 	assert(M_then_body);
 
-	M_test_expression->set_symbol_scope(i_symbol_scope);
-	M_then_body->set_symbol_scope(i_symbol_scope);
+	M_test_expression->set_symbol_scope(&symbol_scope());
+	M_then_body->set_symbol_scope(&symbol_scope());
 	if(M_else_body){
-		M_else_body->set_symbol_scope(i_symbol_scope);
+		M_else_body->set_symbol_scope(&symbol_scope());
+	}
+}
+
+std::string If_Statement::derived_get_wrangler_str_val(const Arguments& irk_args){
+	if(M_test_expression->get_value().as_bool()){
+		return M_then_body->get_wrangler_str_val(irk_args);
+	} else{
+		return M_else_body->get_wrangler_str_val(irk_args);
+	}
+}
+
+void If_Statement::process(const Arguments& irk_args){
+	M_test_expression->process(irk_args);
+	M_then_body->process(irk_args);
+	if(M_else_body){
+		M_else_body->process(irk_args);
 	}
 }
 

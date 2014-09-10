@@ -44,10 +44,15 @@ public:
 
 	bool has_value()const override;
 
-	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope)override;
-
+	void process(const Arguments& /* = empty_arguments() */)override;
+	
 private:
+	void alert_symbol_scope_set()override;
+
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
+
+
 
 template<typename St>
 typename std::enable_if<std::is_base_of<j_symbol, St>::value, bool>::type
@@ -115,12 +120,59 @@ set_symbol_scope_helper(Specific_Symbol_List<St>* /*ik_symbol_list*/
 }
 
 template<typename Symbol_t>
-void jomike::Specific_Symbol_List<Symbol_t>::set_symbol_scope(
-	const J_Symbol_Scope* i_symbol_scope){
-	Symbol_Component_List::set_symbol_scope(i_symbol_scope);
+void jomike::Specific_Symbol_List<Symbol_t>::alert_symbol_scope_set(){
 
-	set_symbol_scope_helper(this, i_symbol_scope);
+
+	set_symbol_scope_helper(this, &symbol_scope());
 }
+
+
+template<typename St>
+typename std::enable_if<!std::is_base_of<j_symbol, St>::value, std::string>::type
+derived_get_wrangler_string_helper(Specific_Symbol_List<St>* /*i_list*/, const Arguments& /*irk_args*/){
+	return "";
+}
+
+template<typename St>
+typename std::enable_if<std::is_base_of<j_symbol, St>::value, std::string>::type
+	derived_get_wrangler_string_helper(Specific_Symbol_List<St>* i_list, const Arguments& irk_args){
+	std::string return_val;
+	for(auto f_symbol : *i_list){
+	
+		return_val += f_symbol->get_wrangler_str_val(irk_args);
+	}
+
+	return return_val;
+}
+template<typename Symbol_t>
+std::string jomike::Specific_Symbol_List<Symbol_t>
+::derived_get_wrangler_str_val(const Arguments& irk_args){
+	return derived_get_wrangler_string_helper(this, irk_args);
+	
+}
+
+template<typename St>
+typename std::enable_if<std::is_base_of<j_symbol, St>::value, void>::type
+process_helper(
+Specific_Symbol_List<St>* ik_symbol_list, const Arguments& irk_args){
+	for(auto f_symbol : *ik_symbol_list){
+		f_symbol->process(irk_args);
+	}
+}
+
+template<typename St>
+typename std::enable_if<!std::is_base_of<j_symbol, St>::value, void>::type
+process_helper(
+Specific_Symbol_List<St>* /*ik_symbol_list*/, const Arguments& /*irk_args*/){
+
+}
+
+
+template<typename Symbol_t>
+void jomike::Specific_Symbol_List<Symbol_t>::process(const Arguments& irk_args){
+	process_helper(this, irk_args);
+}
+
 
 
 }

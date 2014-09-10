@@ -72,7 +72,7 @@ In State *:
 
 <> on_message_recieved(string message){
 	#set_state(PENDING_RECEIVE);
-	#delayed_task([]{#deliver_message(message);}, seconds(1*60 + random()%120));
+	#delayed_task({<[]{#deliver_message(message);}>}, 125 +20);
 }
 
 

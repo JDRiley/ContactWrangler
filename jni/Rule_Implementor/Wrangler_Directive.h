@@ -22,10 +22,15 @@ public:
 	bool has_value()const override;
 
 	~Wrangler_Directive();
+
+	void process(const Arguments& /* = empty_arguments() */)override;
 private:
+
 	Arguments* M_args_list;
 	j_value derived_get_value(const Arguments& i_args)const override;
 	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
+
+	void alert_symbol_scope_set()override;
 };
 
 }

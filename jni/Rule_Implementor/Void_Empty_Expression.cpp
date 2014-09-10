@@ -26,6 +26,18 @@ bool Void_Empty_Expression::has_value()const {
 	return true;
 }
 
+void Void_Empty_Expression::alert_symbol_scope_set(){
+
+}
+
+std::string Void_Empty_Expression::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Void_Empty_Expression::process(const Arguments& /*irk_args*/){
+
+}
+
 }
 
 

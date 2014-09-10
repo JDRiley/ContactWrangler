@@ -21,6 +21,14 @@ j_value Call_Expression::derived_get_value(const Arguments& i_args)const {
 	return get_symbol()->get_value(*M_args_list);
 }
 
+
+std::string Call_Expression::derived_get_wrangler_str_val(const Arguments& irk_args){
+	assert(irk_args.empty());
+	(void)irk_args;
+	return get_symbol()->get_wrangler_str_val(irk_args);
+}
+
+
 Call_Expression::Call_Expression(
 	J_Symbol_Identifier* i_identifier, Arguments* i_args_list)
 	:j_expression(Symbol_Types::EXPRESSION_TYPE_UNINITIALIZED){
@@ -89,6 +97,20 @@ j_symbol* Call_Expression::get_symbol()const{
 
 const Type_Syntax& Call_Expression::return_type_syntax()const {
 	return get_symbol_from_scope(M_identifier->identifier_name())->return_type_syntax();
+}
+
+void Call_Expression::alert_symbol_scope_set(){
+	if(M_base_expression){
+		M_base_expression->set_symbol_scope(&symbol_scope());
+	}
+}
+
+void Call_Expression::process(const Arguments& irk_args){
+	if(M_base_expression){
+		M_base_expression->process(irk_args);
+	}
+
+	M_args_list->process(irk_args);
 }
 
 }

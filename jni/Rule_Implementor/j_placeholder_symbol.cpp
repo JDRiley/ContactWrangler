@@ -46,6 +46,18 @@ string j_placeholder_symbol::get_display_name(){
 	return name();
 }
 
+std::string j_placeholder_symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void j_placeholder_symbol::alert_symbol_scope_set(){
+
+}
+
+void j_placeholder_symbol::process(const Arguments& /*irk_args*/){
+
+}
+
 
 
 }

@@ -27,6 +27,8 @@ public:
 
 	~Custom_Routine_Symbol();
 
+	void process(const Arguments& irk_args)override;
+
 private:
 
 	j_value derived_get_value(const Arguments& i_args)const override;
@@ -36,6 +38,11 @@ private:
 	Statement_Block* M_statement_block;
 	J_Symbol_Scope* M_running_scope;
 
+
+		
+	void alert_symbol_scope_set()override;
+	
+	J_Symbol_Scope* make_new_running_scope(const Arguments& irk_args)const;
 
 	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
 };

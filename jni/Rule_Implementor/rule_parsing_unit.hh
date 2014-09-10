@@ -82,10 +82,11 @@
 #include "Lambda_Expression.h"
 #include "Modulo_Expression.h"
 #include "Wrangler_Directive.h"
+#include "State_Field_Access_Expression.h"
 
 
 /* Line 33 of lalr1.cc  */
-#line 89 "rule_parsing_unit.hh"
+#line 90 "rule_parsing_unit.hh"
 
 
 #include <string>
@@ -101,7 +102,7 @@
 
 namespace yy {
 /* Line 33 of lalr1.cc  */
-#line 105 "rule_parsing_unit.hh"
+#line 106 "rule_parsing_unit.hh"
 
   /// A Bison parser.
   class Rule_Parsing_Unit
@@ -334,7 +335,7 @@ namespace yy {
 
 } // yy
 /* Line 33 of lalr1.cc  */
-#line 338 "rule_parsing_unit.hh"
+#line 339 "rule_parsing_unit.hh"
 
 
 

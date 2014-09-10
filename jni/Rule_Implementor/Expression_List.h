@@ -1,11 +1,11 @@
 #ifndef EXPRESSION_LIST_H
 #define EXPRESSION_LIST_H
 
-#include "j_symbol_component_list.h"
+#include "Specific_Symbol_List.h"
 
 
 namespace jomike{
-class Expression_List : public j_symbol_component_list{
+class Expression_List : public Specific_Symbol_List<j_expression>{
 public:
 	Expression_List();
 	
@@ -13,11 +13,6 @@ public:
 	Expression_List* get_copy()const override;
 
 	Expression_List* move_copy()override;
-	
-	typedef j_symbol_component_list::iterator_type<j_expression> iterator;
-
-	iterator begin()const;
-	iterator end() const;
 
 
 	void add_expression(const j_expression& irk_declaration);

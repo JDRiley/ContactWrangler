@@ -78,20 +78,8 @@ j_value Custom_Routine_Symbol::derived_get_value(const Arguments& irk_args)const
 			+ " expected: " + to_string(M_arg_names.size()) + " args. Given: " + to_string(irk_args.size()));
 	}
 
-	J_Symbol_Scope_Unique_t running_scope(new J_Symbol_Scope(M_running_scope));
-
-	for(int i = 0; i < irk_args.size(); ++i){
-		j_symbol_unique_t arg_symbol(irk_args[i].make_non_referenced());
-		arg_symbol->set_name(M_arg_names[i]);
-		if(arg_symbol->return_type_syntax() != argument_types_list()[i]){
-
-			//arg_symbol = j_symbol_unique_t(arg_symbol->convert_to_type(argument_types_list()[i]));
-
-		}
-
-		running_scope->add_symbol(arg_symbol.release());
-
-	}
+	J_Symbol_Scope_Unique_t running_scope(make_new_running_scope(irk_args));
+		
 
 
 	M_statement_block->set_symbol_scope(running_scope.get());
@@ -99,7 +87,7 @@ j_value Custom_Routine_Symbol::derived_get_value(const Arguments& irk_args)const
 	j_value return_val;
 
 	try{
-		M_statement_block->process();
+		M_statement_block->process(empty_arguments());
 	} catch(J_Routine_Transfer_Exception& e){
 		return_val = e.value();
 	}
@@ -115,8 +103,60 @@ j_value Custom_Routine_Symbol::derived_get_value(const Arguments& irk_args)const
 
 }
 
-string Custom_Routine_Symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/) {
-	return M_statement_block->get_wrangler_str_val(empty_arguments());
+string Custom_Routine_Symbol::derived_get_wrangler_str_val(const Arguments& irk_args) {
+	if(irk_args.size() != M_arg_names.size()){
+		throw J_Symbol_Error(
+			"Improper number of Args to function: " + name()
+			+ " expected: " + to_string(M_arg_names.size()) + " args. Given: " + to_string(irk_args.size()));
+	}
+
+	J_Symbol_Scope_Unique_t running_scope(make_new_running_scope(irk_args));
+
+
+
+	M_statement_block->set_symbol_scope(running_scope.get());
+
+
+	string wrangler_str;
+	string return_val_str;
+	try{
+		for(auto f_statement : M_statement_block->symbol_list()){
+			wrangler_str += f_statement->get_wrangler_str_val(empty_arguments());
+		}
+	} catch(J_Routine_Transfer_Exception& e){
+		return_val_str = e.value().as_string();
+	}
+
+
+	return wrangler_str + " ~~ " + return_val_str;
+
+	
+}
+
+void Custom_Routine_Symbol::alert_symbol_scope_set(){
+	M_statement_block->set_symbol_scope(&symbol_scope());
+}
+
+J_Symbol_Scope* Custom_Routine_Symbol::make_new_running_scope(const Arguments& irk_args)const{
+	J_Symbol_Scope* running_scope = new J_Symbol_Scope(M_running_scope);
+
+	for(int i = 0; i < irk_args.size(); ++i){
+		j_symbol_unique_t arg_symbol(irk_args[i].make_non_referenced());
+		arg_symbol->set_name(M_arg_names[i]);
+		if(arg_symbol->return_type_syntax() != argument_types_list()[i]){
+
+			//arg_symbol = j_symbol_unique_t(arg_symbol->convert_to_type(argument_types_list()[i]));
+
+		}
+
+		running_scope->add_symbol(arg_symbol.release());
+
+	}
+	return running_scope;
+}
+
+void Custom_Routine_Symbol::process(const Arguments& /*irk_args*/){
+
 }
 
 

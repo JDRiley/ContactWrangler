@@ -23,9 +23,15 @@ public:
 
 	void clear();
 
+	void process(const Arguments& irk_args)override;
+
 private:
 	j_expression* M_expression = nullptr;
 	j_value derived_get_value(const Arguments& i_args)const override;
+
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
 
 }

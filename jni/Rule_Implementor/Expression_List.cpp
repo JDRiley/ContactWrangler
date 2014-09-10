@@ -7,7 +7,7 @@ namespace jomike{
 
 
 void Expression_List::add_expression(const j_expression& irk_declaration){
-	add_syntax_component(irk_declaration);
+	add_symbol_component(irk_declaration);
 }
 
 Expression_List* Expression_List::move_copy(){
@@ -22,13 +22,6 @@ Expression_List::Expression_List(){
 
 }
 
-jomike::Expression_List::iterator Expression_List::end()const{
-	return j_symbol_component_list::end();
-}
-
-jomike::Expression_List::iterator Expression_List::begin()const{
-	return j_symbol_component_list::begin();
-}
 
 }
 

@@ -27,6 +27,18 @@ Value_Expression* Value_Expression::get_copy()const {
 	return new Value_Expression(*this);
 }
 
+std::string Value_Expression::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Value_Expression::alert_symbol_scope_set(){
+
+}
+
+void Value_Expression::process(const Arguments& /*irk_args*/){
+
+}
+
 }
 
 

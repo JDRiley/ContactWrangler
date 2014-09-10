@@ -20,6 +20,18 @@ Constant_Symbol::Constant_Symbol(
 	set_type_syntax(make_type_syntax(i_symbol_type));
 }
 
+std::string Constant_Symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Constant_Symbol::alert_symbol_scope_set(){
+
+}
+
+void Constant_Symbol::process(const Arguments& /* = empty_arguments() */){
+
+}
+
 
 
 

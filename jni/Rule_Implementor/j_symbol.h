@@ -49,7 +49,7 @@ public:
 
 	virtual bool is_placeholder()const;
 
-
+	//There is a default implementation of this
 	virtual j_symbol* make_non_referenced()const;
 
 	j_symbol(const j_symbol& irk_symbol);
@@ -57,7 +57,9 @@ public:
 
 	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope);
 
-	virtual void process(const Arguments& = empty_arguments());
+
+	//There is a default implementation of this
+	virtual void process(const Arguments& = empty_arguments()) = 0;
 
 	virtual const Type_Syntax& return_type_syntax()const;
 
@@ -76,7 +78,7 @@ private:
 	Type_Syntax* M_type = nullptr;
 	J_Symbol_Identifier* M_name;
 
-	virtual void alert_symbol_scope_set();
+	virtual void alert_symbol_scope_set() = 0;
 
 	virtual std::string derived_get_wrangler_str_val(const Arguments& irk_args) = 0;
 };

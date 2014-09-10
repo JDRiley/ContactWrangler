@@ -28,13 +28,16 @@ public:
 
 	bool has_value()const override;
 
-	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope);
+	void process(const Arguments& /* = empty_arguments() */)override;
+
 protected:
 	j_value derived_get_value(const Arguments& i_args)const override;
 private:
 
 	
-
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 
 	j_expression* M_expression;
 };

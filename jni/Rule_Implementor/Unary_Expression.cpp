@@ -52,15 +52,25 @@ bool Unary_Expression::has_expression()const{
 	return M_expression;
 }
 
-void Unary_Expression::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
-	j_expression::set_symbol_scope(i_symbol_scope);
-	if(has_expression()){
-		base_expression().set_symbol_scope(i_symbol_scope);
-	}
-}
+
 
 j_value Unary_Expression::derived_get_value(const Arguments& i_args)const {
 	return M_expression->get_value(i_args);
+}
+
+std::string Unary_Expression::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Unary_Expression::alert_symbol_scope_set(){
+	assert(M_expression);
+	if(has_expression()){
+		M_expression->set_symbol_scope(&symbol_scope());
+	}
+}
+
+void Unary_Expression::process(const Arguments& irk_args){
+	M_expression->process(irk_args);
 }
 
 }

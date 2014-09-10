@@ -21,11 +21,17 @@ public:
 
 	~Aggregate_Value_Symbol();
 
+	void process(const Arguments& irk_args)override;
+
 	bool has_value()const;
 private:
 	Expression_List* M_expressions;
 
 	j_value derived_get_value(const Arguments& i_args)const override;
+
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
 
 }

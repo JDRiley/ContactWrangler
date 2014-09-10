@@ -212,6 +212,7 @@
     <ClInclude Include="Rule_Implementor.h" />
     <ClInclude Include="Rule_Data.h" />
     <ClInclude Include="State_Declaration.h" />
+    <ClInclude Include="State_Field_Access_Expression.h" />
     <ClInclude Include="State_ID.h" />
     <ClInclude Include="State_ID_Factory.h" />
     <ClInclude Include="State_Specification.h" />
@@ -320,6 +321,7 @@
     </ClCompile>
     <ClCompile Include="Statement_Block.cpp" />
     <ClCompile Include="State_Declaration.cpp" />
+    <ClCompile Include="State_Field_Access_Expression.cpp" />
     <ClCompile Include="State_ID.cpp" />
     <ClCompile Include="State_ID_Factory.cpp" />
     <ClCompile Include="State_Specification.cpp" />

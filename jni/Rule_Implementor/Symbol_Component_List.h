@@ -63,6 +63,7 @@ class Symbol_Component_List::iterator_type
 	: public Symbol_Component_List::symbol_iterator{
 private:
 	typedef Symbol_Component_List::symbol_iterator M_Base_t;
+	typedef Symbol_Component_List::iterator_type<Symbol_Component_t> this_type;
 public:
 
 	iterator_type(const Symbol_Component_List::symbol_iterator& irk_base);
@@ -70,6 +71,17 @@ public:
 	Symbol_Component_t* operator*()const;
 
 	Symbol_Component_t** operator->()const;
+
+
+	this_type& operator++(){ M_Base_t::operator++(); return *this; }
+	this_type operator++(int){ return M_Base_t::operator++(0); }
+
+	this_type& operator--(){ M_Base_t::operator--(); return *this; }
+	this_type operator--(int){ return M_Base_t::operator--(0); }
+
+
+
+
 };
 
 template<typename Symbol_Component_t>

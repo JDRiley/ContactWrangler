@@ -44,8 +44,27 @@ void Expression_Statement::clear(){
 	M_expression->clear();
 }
 
-void Expression_Statement::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
-	M_expression->set_symbol_scope(i_symbol_scope);
+
+
+std::string Expression_Statement::derived_get_wrangler_str_val(const Arguments& irk_args){
+	if(M_expression){
+		return M_expression->get_wrangler_str_val(irk_args);
+	}
+	return "";
+}
+
+void Expression_Statement::alert_symbol_scope_set(){
+	if(M_expression){
+		M_expression->set_symbol_scope(&symbol_scope());
+	}
+
+	
+}
+
+void Expression_Statement::process(const Arguments& /* = empty_arguments() */){
+	if(M_expression){
+		M_expression->process();
+	}
 }
 
 }

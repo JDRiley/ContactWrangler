@@ -12,7 +12,13 @@ public:
 	
 	Constant_Symbol* get_copy()const override = 0;
 	Constant_Symbol* move_copy()override = 0;
+
+	void process(const Arguments& /* = empty_arguments() */)override;
 private:
+
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
 
 

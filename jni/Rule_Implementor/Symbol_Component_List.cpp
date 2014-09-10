@@ -63,7 +63,6 @@ jomike::j_value Symbol_Component_List::derived_get_value(const Arguments& i_args
 		for(auto symbol : M_components){
 			auto symbol_ptr = dynamic_cast<j_symbol*>(symbol);
 			if(symbol_ptr){
-				symbol_ptr->set_symbol_scope(&new_scope);
 				symbol_ptr->get_value();
 			}
 

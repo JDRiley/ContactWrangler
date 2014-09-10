@@ -50,9 +50,9 @@ Statement_Block::~Statement_Block(){
 	delete M_symbol_list;
 }
 
-void Statement_Block::set_symbol_scope(const J_Symbol_Scope* i_symbol_scope){
-	j_statement::set_symbol_scope(i_symbol_scope);
-	M_symbol_list->set_symbol_scope(i_symbol_scope);
+void Statement_Block::alert_symbol_scope_set(){
+
+	M_symbol_list->set_symbol_scope(&symbol_scope());
 }
 
 std::string Statement_Block::derived_get_wrangler_str_val(const Arguments& irk_args){
@@ -63,6 +63,18 @@ std::string Statement_Block::derived_get_wrangler_str_val(const Arguments& irk_a
 	}
 
 	return return_val;
+}
+
+const Symbol_List& Statement_Block::symbol_list()const{
+	return *M_symbol_list;
+}
+
+Symbol_List& Statement_Block::symbol_list(){
+	return *M_symbol_list;
+}
+
+void Statement_Block::process(const Arguments& irk_args){
+	M_symbol_list->process(irk_args);
 }
 
 

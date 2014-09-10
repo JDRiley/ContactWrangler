@@ -19,10 +19,16 @@ public:
 	j_size_t placeholder_index()const;
 
 	std::string get_display_name()override;
+
+	void process(const Arguments& /*irk_args*/)override;
 protected:
 	j_value derived_get_value(const Arguments& i_args)const override;
 private:
 	j_size_t M_Placeholder_index;
+
+	void alert_symbol_scope_set()override;
+	
+	std::string derived_get_wrangler_str_val(const Arguments& /*irk_args*/)override;
 };
 
 }

@@ -20,10 +20,10 @@ int main(){
 	int implementor_handle = jtl::generate_rule_parser(file_string);
 	(void)implementor_handle;
 
+	
+	string return_val =  jtl::process_command(implementor_handle, "State: SENT :on_message_recieved(\"Hey Milly\");");
 
-	cout << jtl::process_command(implementor_handle, "State: SENT :on_message_recieved(\"Hey Milly\");");
-
-
+	cout << return_val << endl;
 	return 0;
 
 

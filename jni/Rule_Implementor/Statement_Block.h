@@ -28,8 +28,10 @@ public:
 	~Statement_Block();
 
 
+	const Symbol_List& symbol_list()const;
+	Symbol_List& symbol_list();
 
-	void set_symbol_scope(const J_Symbol_Scope* i_symbol_scope)override;
+	void process(const Arguments& irk_args)override;
 private:
 	Symbol_List* M_symbol_list;
 
@@ -37,6 +39,7 @@ private:
 
 	std::string derived_get_wrangler_str_val(const Arguments& irk_args)override;
 
+	void alert_symbol_scope_set()override;
 	
 };
 

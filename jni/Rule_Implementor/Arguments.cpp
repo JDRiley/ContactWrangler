@@ -112,7 +112,15 @@ Arguments::const_iterator Arguments::begin()const{
 	return M_arg_symbols.begin();
 }
 
+jomike::Arguments::iterator Arguments::begin(){
+	return M_arg_symbols.begin();
+}
+
 Arguments::const_iterator Arguments::end()const{
+	return M_arg_symbols.end();
+}
+
+jomike::Arguments::iterator Arguments::end(){
 	return M_arg_symbols.end();
 }
 
@@ -124,5 +132,13 @@ Arguments* Arguments::move_copy(){
 Arguments* Arguments::get_copy()const {
 	return new Arguments(*this);
 }
+
+void Arguments::process(const Arguments& irk_args){
+	for(auto f_sym : M_arg_symbols){
+		f_sym->process(irk_args);
+	}
+}
+
+
 
 }

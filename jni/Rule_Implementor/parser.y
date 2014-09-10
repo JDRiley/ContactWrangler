@@ -96,6 +96,7 @@ j_symbol_component* jtl::g_input_line = nullptr;
 #include "Lambda_Expression.h"
 #include "Modulo_Expression.h"
 #include "Wrangler_Directive.h"
+#include "State_Field_Access_Expression.h"
 }
 
 /* The section before the first %% is the Definitions section of the yacc
@@ -576,7 +577,7 @@ Field_Access_Expression
 	
 }
 | T_UPPERCASE_IDENTIFIER{
-	$$ = new Field_Access_Expression($1);
+	$$ = new State_Field_Access_Expression($1);
 }
 | Expression '.' T_IDENTIFIER %prec '.'{
 	$$ = new Field_Access_Expression($3, $1);

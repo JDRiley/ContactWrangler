@@ -61,6 +61,18 @@ Variable_Symbol* Variable_Symbol::move_copy(){
 	return  new Variable_Symbol(std::move(*this));
 }
 
+std::string Variable_Symbol::derived_get_wrangler_str_val(const Arguments& /*irk_args*/){
+	return "";
+}
+
+void Variable_Symbol::alert_symbol_scope_set(){
+
+}
+
+void Variable_Symbol::process(const Arguments& /*irk_args*/){
+
+}
+
 }
 
 

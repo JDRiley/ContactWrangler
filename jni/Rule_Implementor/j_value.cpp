@@ -448,6 +448,8 @@ std::string j_value::cast_to()const{
 		return M_val.bool_val ? "true" : "false";
 	case j_value::Value_Types::STRING:
 		return *M_val.str_val;
+	case j_value::Value_Types::AGGREGATE:
+		return M_val.aggregate_val->get_wrangler_str_val(empty_arguments());
 	case j_value::Value_Types::UNDEFINIED:
 		throw J_Value_Error("Undefined Value type");
 	default:

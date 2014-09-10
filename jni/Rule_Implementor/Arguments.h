@@ -10,6 +10,8 @@
 #include "j_expression.h"
 //
 #include "J_Symbol_Component_Array.h"
+//
+#include "Specific_Symbol_List.h"
 namespace jomike{
 class j_symbol;
 
@@ -57,9 +59,18 @@ public:
 
 	void swap(Arguments&);
 
+	void process(const Arguments& irk_args);
+
+	typedef J_Symbol_Component_Array<j_expression>::iterator iterator;
 	typedef J_Symbol_Component_Array<j_expression>::const_iterator const_iterator;
 	const_iterator begin()const;
 	const_iterator end()const;
+
+	iterator begin();
+
+
+
+	iterator end();
 private:
 	J_Symbol_Component_Array<j_expression> M_arg_symbols;
 };

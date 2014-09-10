@@ -24,6 +24,8 @@ private:
 
 
 	j_value derived_get_value(const Arguments& i_args)const override;
+
+
 };
 
 }

@@ -5,6 +5,10 @@
 #include "Statement_Block.h"
 //
 #include "j_declaration.h"
+//
+#include "Arguments.h"
+//
+#include "Aggregate_Value_Symbol.h"
 namespace jomike{
 
 
@@ -44,8 +48,31 @@ bool Lambda_Expression::has_value()const {
 }
 
 j_value Lambda_Expression::derived_get_value(const Arguments& /*i_args*/)const {
-	assert(!"This has not been implemented. See custom routine symbol");
-	return J_VALUE_FALSE_BOOLEAN;
+
+	Arguments args;
+	args.push_back(get_copy());
+	return j_value(Aggregate_Value_Symbol(args), J_Unit());
+
+
+}
+
+std::string Lambda_Expression::derived_get_wrangler_str_val(const Arguments& irk_args){
+	std::string return_string = "Lambda: @";
+	//@ is a sentinal character declaring the bounds of a lambda. 
+	//NOTE: this means currently you cannot have nested lambda expressions!
+
+	return_string += M_statement_block->get_wrangler_str_val(irk_args);
+	return_string.push_back('@');
+	return return_string;
+}
+
+void Lambda_Expression::alert_symbol_scope_set(){
+	M_statement_block->set_symbol_scope(&symbol_scope());
+}
+
+void Lambda_Expression::process(const Arguments& irk_args){
+	M_static_declarations->process(irk_args);
+	M_statement_block->process(irk_args);
 }
 
 

@@ -15,7 +15,8 @@
 #include "Arguments.h"
 //
 #include <j_tree.h>
-
+//
+#include "j_declaration.h"
 using std::string;
 
 namespace jomike{
@@ -96,6 +97,7 @@ j_symbol::j_symbol(Symbol_Types i_symbol_type) : j_symbol_component(i_symbol_typ
 	M_name = new J_Symbol_Identifier("%Unvalued");
 	M_type = nullptr;
 	M_arguments = empty_arguments().get_copy();
+
 }
 
 j_symbol::j_symbol(const j_symbol& irk_symbol):j_symbol_component(irk_symbol){
@@ -106,6 +108,7 @@ j_symbol::j_symbol(const j_symbol& irk_symbol):j_symbol_component(irk_symbol){
 	M_name = irk_symbol.M_name->get_copy();
 
 	M_arguments = irk_symbol.M_arguments->get_copy();
+	M_symbol_scope = irk_symbol.M_symbol_scope;
 }
 
 j_symbol::j_symbol(j_symbol&& irr_symbol)
@@ -117,6 +120,7 @@ j_symbol::j_symbol(j_symbol&& irr_symbol)
 	M_name = irr_symbol.M_name->move_copy();
 
 	M_arguments = irr_symbol.M_arguments->move_copy();
+	M_symbol_scope = irr_symbol.M_symbol_scope;
 }
 
 

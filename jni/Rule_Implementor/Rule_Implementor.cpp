@@ -28,6 +28,7 @@ namespace jomike{
 
 
 j_symbol* get_j_symbol_from_model(const string& irk_name){
+	
 	throw J_Symbol_Error("No Global Symbols in Rule Wrangler. Symbol: " + irk_name + " not found!");
 }
 

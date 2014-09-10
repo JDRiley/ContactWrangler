@@ -3,6 +3,15 @@
 #include "Expression_List.h"
 //
 #include "Arguments.h"
+
+//
+#include <sstream>
+
+using std::ostringstream;
+using std::istringstream;
+
+
+
 namespace jomike{
 
 
@@ -53,6 +62,36 @@ bool Aggregate_Value_Symbol::has_value()const{
 j_value Aggregate_Value_Symbol::derived_get_value(const Arguments& /*i_args*/)const {
 	return j_value(*this, J_Unit());
 }
+
+std::string Aggregate_Value_Symbol::derived_get_wrangler_str_val(const Arguments& irk_args){
+	ostringstream o_str;
+
+	o_str << "Aggregate: " <<  M_expressions->size() << " ";
+
+	auto arg_pos = M_expressions->begin();
+	
+	if(M_expressions->size()){
+		o_str << (*arg_pos++)->get_wrangler_str_val(irk_args);
+
+
+		while(arg_pos != M_expressions->end()){
+			o_str << ", " << (*arg_pos++)->get_wrangler_str_val(irk_args);
+		}
+
+	}
+	o_str << ";";
+	return o_str.str();
+}
+
+void Aggregate_Value_Symbol::alert_symbol_scope_set(){
+	M_expressions->set_symbol_scope(&symbol_scope());
+}
+
+void Aggregate_Value_Symbol::process(const Arguments& irk_args){
+	M_expressions->process(irk_args);
+}
+
+
 
 }
 

@@ -453,7 +453,7 @@ namespace yy {
       {
           case 2:
 /* Line 670 of lalr1.cc  */
-#line 206 "parser.y"
+#line 207 "parser.y"
     {
 	*i_rule_implementor = new Rule_Implementor((yysemantic_stack_[(4) - (3)].state_spec_list), i_rule_data);
 	return true;
@@ -462,7 +462,7 @@ namespace yy {
 
   case 3:
 /* Line 670 of lalr1.cc  */
-#line 213 "parser.y"
+#line 214 "parser.y"
     {
 	(yyval.state_decl_list) = new State_Declaration_List;
 	(yyval.state_decl_list)->add_symbol((yysemantic_stack_[(1) - (1)].state_decl));
@@ -471,7 +471,7 @@ namespace yy {
 
   case 4:
 /* Line 670 of lalr1.cc  */
-#line 217 "parser.y"
+#line 218 "parser.y"
     {
 	(yyval.state_decl_list) = (yysemantic_stack_[(2) - (1)].state_decl_list);
 	(yyval.state_decl_list)->add_symbol((yysemantic_stack_[(2) - (2)].state_decl));
@@ -481,7 +481,7 @@ namespace yy {
 
   case 5:
 /* Line 670 of lalr1.cc  */
-#line 224 "parser.y"
+#line 225 "parser.y"
     {
 	(yyval.state_decl) = new State_Declaration((yysemantic_stack_[(4) - (3)].identifier));
 }
@@ -489,7 +489,7 @@ namespace yy {
 
   case 6:
 /* Line 670 of lalr1.cc  */
-#line 227 "parser.y"
+#line 228 "parser.y"
     {
 	(yyval.state_decl) = new State_Declaration((yysemantic_stack_[(5) - (3)].identifier), (yysemantic_stack_[(5) - (4)].declaration_list));
 }
@@ -497,7 +497,7 @@ namespace yy {
 
   case 7:
 /* Line 670 of lalr1.cc  */
-#line 233 "parser.y"
+#line 234 "parser.y"
     {
 	(yyval.state_spec_list) = new State_Specification_List;
 	(yyval.state_spec_list)->add_symbol((yysemantic_stack_[(1) - (1)].state_spec));
@@ -506,7 +506,7 @@ namespace yy {
 
   case 8:
 /* Line 670 of lalr1.cc  */
-#line 237 "parser.y"
+#line 238 "parser.y"
     {
 	(yyval.state_spec_list) = (yysemantic_stack_[(2) - (1)].state_spec_list);
 	(yyval.state_spec_list)->add_symbol((yysemantic_stack_[(2) - (2)].state_spec));
@@ -515,7 +515,7 @@ namespace yy {
 
   case 9:
 /* Line 670 of lalr1.cc  */
-#line 244 "parser.y"
+#line 245 "parser.y"
     {
 	(yyval.state_spec) = new State_Specification((yysemantic_stack_[(5) - (3)].state_id), *(yysemantic_stack_[(5) - (5)].declaration_list));
 }
@@ -523,7 +523,7 @@ namespace yy {
 
   case 10:
 /* Line 670 of lalr1.cc  */
-#line 253 "parser.y"
+#line 254 "parser.y"
     {
 	(yyval.declaration_list) = (yysemantic_stack_[(3) - (2)].declaration_list);
 }
@@ -531,7 +531,7 @@ namespace yy {
 
   case 11:
 /* Line 670 of lalr1.cc  */
-#line 259 "parser.y"
+#line 260 "parser.y"
     {
 
 }
@@ -539,7 +539,7 @@ namespace yy {
 
   case 12:
 /* Line 670 of lalr1.cc  */
-#line 262 "parser.y"
+#line 263 "parser.y"
     {
 	i_rule_data.add_filter((yysemantic_stack_[(2) - (2)].filter));
 }
@@ -547,7 +547,7 @@ namespace yy {
 
   case 13:
 /* Line 670 of lalr1.cc  */
-#line 268 "parser.y"
+#line 269 "parser.y"
     {
 	(yyval.filter) = new Wrangler_Filter((yysemantic_stack_[(5) - (3)].identifier), (yysemantic_stack_[(5) - (4)].filter_spec));
 }
@@ -555,7 +555,7 @@ namespace yy {
 
   case 14:
 /* Line 670 of lalr1.cc  */
-#line 274 "parser.y"
+#line 275 "parser.y"
     {
 	(yyval.filter_spec) = i_rule_data.get_filter((yysemantic_stack_[(1) - (1)].identifier)->identifier_name()).get_copy();
 }
@@ -563,7 +563,7 @@ namespace yy {
 
   case 15:
 /* Line 670 of lalr1.cc  */
-#line 277 "parser.y"
+#line 278 "parser.y"
     {
 	(yyval.filter_spec) = new Negated_Filter_Specification((yysemantic_stack_[(2) - (2)].filter_spec));
 }
@@ -571,7 +571,7 @@ namespace yy {
 
   case 16:
 /* Line 670 of lalr1.cc  */
-#line 280 "parser.y"
+#line 281 "parser.y"
     {
 	(yyval.filter_spec) = new Has_Filter_Specification(*(yysemantic_stack_[(5) - (4)].string_list));
 	(yysemantic_stack_[(5) - (4)].string_list).destroy();
@@ -580,7 +580,7 @@ namespace yy {
 
   case 17:
 /* Line 670 of lalr1.cc  */
-#line 284 "parser.y"
+#line 285 "parser.y"
     {
 	(yyval.filter_spec) = new Combined_Filter_Specification((yysemantic_stack_[(3) - (1)].filter_spec), (yysemantic_stack_[(3) - (3)].filter_spec));
 }
@@ -588,7 +588,7 @@ namespace yy {
 
   case 18:
 /* Line 670 of lalr1.cc  */
-#line 287 "parser.y"
+#line 288 "parser.y"
     {
 	(yyval.filter_spec) = (yysemantic_stack_[(3) - (2)].filter_spec);
 }
@@ -596,7 +596,7 @@ namespace yy {
 
   case 19:
 /* Line 670 of lalr1.cc  */
-#line 294 "parser.y"
+#line 295 "parser.y"
     {
 	(yyval.string_list) = new String_Constant_Symbol_List;
 	(yyval.string_list)->add_symbol((yysemantic_stack_[(1) - (1)].string_constant));
@@ -605,7 +605,7 @@ namespace yy {
 
   case 20:
 /* Line 670 of lalr1.cc  */
-#line 298 "parser.y"
+#line 299 "parser.y"
     {
 	(yyval.string_list) = (yysemantic_stack_[(3) - (1)].string_list);
 	(yyval.string_list)->add_symbol((yysemantic_stack_[(3) - (3)].string_constant));
@@ -614,7 +614,7 @@ namespace yy {
 
   case 21:
 /* Line 670 of lalr1.cc  */
-#line 305 "parser.y"
+#line 306 "parser.y"
     {
 	(yyval.state_id) = new State_ID((yysemantic_stack_[(1) - (1)].identifier));
 }
@@ -622,7 +622,7 @@ namespace yy {
 
   case 22:
 /* Line 670 of lalr1.cc  */
-#line 308 "parser.y"
+#line 309 "parser.y"
     {
 	(yyval.state_id) = new State_ID(new J_Symbol_Identifier("*"));
 }
@@ -630,7 +630,7 @@ namespace yy {
 
   case 23:
 /* Line 670 of lalr1.cc  */
-#line 314 "parser.y"
+#line 315 "parser.y"
     {
 	(yyval.statement) = new Expression_Statement((yysemantic_stack_[(2) - (1)].expression));
 }
@@ -638,7 +638,7 @@ namespace yy {
 
   case 24:
 /* Line 670 of lalr1.cc  */
-#line 317 "parser.y"
+#line 318 "parser.y"
     {
 	(yyval.statement) = (yysemantic_stack_[(1) - (1)].if_statement);
 }
@@ -646,7 +646,7 @@ namespace yy {
 
   case 25:
 /* Line 670 of lalr1.cc  */
-#line 321 "parser.y"
+#line 322 "parser.y"
     {
 	(yyval.statement) = (yysemantic_stack_[(2) - (1)].declaration);
 }
@@ -654,7 +654,7 @@ namespace yy {
 
   case 26:
 /* Line 670 of lalr1.cc  */
-#line 324 "parser.y"
+#line 325 "parser.y"
     {
 	(yyval.statement) = new Transfer_Statement((yysemantic_stack_[(3) - (2)].expression));
 }
@@ -662,7 +662,7 @@ namespace yy {
 
   case 27:
 /* Line 670 of lalr1.cc  */
-#line 330 "parser.y"
+#line 331 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(4) - (3)].expression);
 }
@@ -670,7 +670,7 @@ namespace yy {
 
   case 28:
 /* Line 670 of lalr1.cc  */
-#line 335 "parser.y"
+#line 336 "parser.y"
     {
 	(yyval.if_statement) = new If_Statement((yysemantic_stack_[(2) - (1)].expression), (yysemantic_stack_[(2) - (2)].statement_block));
 }
@@ -678,7 +678,7 @@ namespace yy {
 
   case 29:
 /* Line 670 of lalr1.cc  */
-#line 338 "parser.y"
+#line 339 "parser.y"
     {
 	(yyval.if_statement) = new If_Statement((yysemantic_stack_[(4) - (1)].expression), (yysemantic_stack_[(4) - (2)].statement_block), (yysemantic_stack_[(4) - (4)].statement_block));
 }
@@ -686,7 +686,7 @@ namespace yy {
 
   case 30:
 /* Line 670 of lalr1.cc  */
-#line 341 "parser.y"
+#line 342 "parser.y"
     {
 	(yyval.if_statement) = new If_Statement((yysemantic_stack_[(4) - (1)].expression), (yysemantic_stack_[(4) - (2)].statement_block), (yysemantic_stack_[(4) - (4)].if_statement));
 }
@@ -694,7 +694,7 @@ namespace yy {
 
   case 31:
 /* Line 670 of lalr1.cc  */
-#line 344 "parser.y"
+#line 345 "parser.y"
     {
 	(yyval.if_statement) = new If_Statement((yysemantic_stack_[(5) - (1)].expression), (yysemantic_stack_[(5) - (2)].expression), (yysemantic_stack_[(5) - (4)].expression));
 }
@@ -702,7 +702,7 @@ namespace yy {
 
   case 32:
 /* Line 670 of lalr1.cc  */
-#line 350 "parser.y"
+#line 351 "parser.y"
     {
 	(yyval.statement_block) = new Statement_Block((yysemantic_stack_[(3) - (2)].symbol_list));
 }
@@ -710,7 +710,7 @@ namespace yy {
 
   case 33:
 /* Line 670 of lalr1.cc  */
-#line 355 "parser.y"
+#line 356 "parser.y"
     {
 (yyval.symbol_list) = new Specific_Symbol_List<j_symbol>();
 }
@@ -718,7 +718,7 @@ namespace yy {
 
   case 34:
 /* Line 670 of lalr1.cc  */
-#line 358 "parser.y"
+#line 359 "parser.y"
     {
 	(yyval.symbol_list) = (yysemantic_stack_[(2) - (1)].symbol_list);
 	(yyval.symbol_list)->add_symbol((yysemantic_stack_[(2) - (2)].statement));
@@ -727,7 +727,7 @@ namespace yy {
 
   case 35:
 /* Line 670 of lalr1.cc  */
-#line 364 "parser.y"
+#line 365 "parser.y"
     {
 	(yyval.declaration_list) = new Specific_Symbol_List<j_declaration>;
 }
@@ -735,7 +735,7 @@ namespace yy {
 
   case 36:
 /* Line 670 of lalr1.cc  */
-#line 367 "parser.y"
+#line 368 "parser.y"
     {
 	(yyval.declaration_list) = new Specific_Symbol_List<j_declaration>();
 	(yyval.declaration_list)->add_symbol((yysemantic_stack_[(1) - (1)].declaration));
@@ -744,7 +744,7 @@ namespace yy {
 
   case 37:
 /* Line 670 of lalr1.cc  */
-#line 371 "parser.y"
+#line 372 "parser.y"
     {
 	(yyval.declaration_list) = (yysemantic_stack_[(3) - (1)].declaration_list);
 	(yyval.declaration_list)->add_symbol((yysemantic_stack_[(3) - (3)].declaration));
@@ -753,13 +753,13 @@ namespace yy {
 
   case 38:
 /* Line 670 of lalr1.cc  */
-#line 378 "parser.y"
+#line 379 "parser.y"
     {(yyval.declaration) = (yysemantic_stack_[(1) - (1)].declaration);}
     break;
 
   case 39:
 /* Line 670 of lalr1.cc  */
-#line 379 "parser.y"
+#line 380 "parser.y"
     { 
 	(yyval.declaration) = (yysemantic_stack_[(1) - (1)].declaration); 
 }
@@ -767,7 +767,7 @@ namespace yy {
 
   case 40:
 /* Line 670 of lalr1.cc  */
-#line 385 "parser.y"
+#line 386 "parser.y"
     {
 	std::unique_ptr<Declaration_List> decl_list(new Declaration_List);
 
@@ -779,7 +779,7 @@ namespace yy {
 
   case 41:
 /* Line 670 of lalr1.cc  */
-#line 392 "parser.y"
+#line 393 "parser.y"
     {
 	std::unique_ptr<Declaration_List> decl_list(new Declaration_List);
 
@@ -791,7 +791,7 @@ namespace yy {
 
   case 42:
 /* Line 670 of lalr1.cc  */
-#line 402 "parser.y"
+#line 403 "parser.y"
     {
 	(yyval.expression) = new Lambda_Expression((yysemantic_stack_[(4) - (2)].declaration_list), (yysemantic_stack_[(4) - (4)].statement_block));
 }
@@ -799,7 +799,7 @@ namespace yy {
 
   case 43:
 /* Line 670 of lalr1.cc  */
-#line 408 "parser.y"
+#line 409 "parser.y"
     {
 	(yyval.declaration_list) = (yysemantic_stack_[(3) - (2)].declaration_list);
 }
@@ -807,7 +807,7 @@ namespace yy {
 
   case 44:
 /* Line 670 of lalr1.cc  */
-#line 415 "parser.y"
+#line 416 "parser.y"
     {(yyval.declaration) =  new Variable_Symbol((yysemantic_stack_[(2) - (1)].type_syntax), (yysemantic_stack_[(2) - (2)].identifier));
 	
 	
@@ -816,7 +816,7 @@ namespace yy {
 
   case 45:
 /* Line 670 of lalr1.cc  */
-#line 419 "parser.y"
+#line 420 "parser.y"
     {
 	(yyval.declaration) = new Variable_Reference_Symbol((yysemantic_stack_[(4) - (1)].type_syntax), (yysemantic_stack_[(4) - (2)].identifier), (yysemantic_stack_[(4) - (4)].expression)); 
 	
@@ -827,7 +827,7 @@ namespace yy {
 
   case 46:
 /* Line 670 of lalr1.cc  */
-#line 425 "parser.y"
+#line 426 "parser.y"
     {
 	(yyval.declaration) = new Variable_Symbol((yysemantic_stack_[(4) - (1)].type_syntax), (yysemantic_stack_[(4) - (2)].identifier), *(yysemantic_stack_[(4) - (4)].expression));
 	
@@ -839,37 +839,37 @@ namespace yy {
 
   case 47:
 /* Line 670 of lalr1.cc  */
-#line 435 "parser.y"
+#line 436 "parser.y"
     {(yyval.type_syntax) = make_double_type_syntax();}
     break;
 
   case 48:
 /* Line 670 of lalr1.cc  */
-#line 436 "parser.y"
+#line 437 "parser.y"
     {(yyval.type_syntax) = make_int_type_syntax();}
     break;
 
   case 49:
 /* Line 670 of lalr1.cc  */
-#line 437 "parser.y"
+#line 438 "parser.y"
     {(yyval.type_syntax) = make_bool_type_syntax();}
     break;
 
   case 50:
 /* Line 670 of lalr1.cc  */
-#line 438 "parser.y"
+#line 439 "parser.y"
     {(yyval.type_syntax) = make_void_type_syntax(); }
     break;
 
   case 51:
 /* Line 670 of lalr1.cc  */
-#line 439 "parser.y"
+#line 440 "parser.y"
     {(yyval.type_syntax) = make_string_type_syntax(); }
     break;
 
   case 52:
 /* Line 670 of lalr1.cc  */
-#line 440 "parser.y"
+#line 441 "parser.y"
     {
 	(yyval.type_syntax) = new Type_Aggregate((yysemantic_stack_[(3) - (2)].type_syntax_list));
 }
@@ -877,7 +877,7 @@ namespace yy {
 
   case 53:
 /* Line 670 of lalr1.cc  */
-#line 443 "parser.y"
+#line 444 "parser.y"
     {
 	(yyval.type_syntax) = make_void_type_syntax();
 }
@@ -885,7 +885,7 @@ namespace yy {
 
   case 54:
 /* Line 670 of lalr1.cc  */
-#line 449 "parser.y"
+#line 450 "parser.y"
     {
 	(yyval.type_syntax_list) = new Type_Syntax_List;
 	(yyval.type_syntax_list)->add_symbol((yysemantic_stack_[(1) - (1)].type_syntax));
@@ -894,7 +894,7 @@ namespace yy {
 
   case 55:
 /* Line 670 of lalr1.cc  */
-#line 453 "parser.y"
+#line 454 "parser.y"
     {
 	(yyval.type_syntax_list) = (yysemantic_stack_[(3) - (1)].type_syntax_list);
 	(yyval.type_syntax_list)->add_symbol((yysemantic_stack_[(3) - (3)].type_syntax));
@@ -903,7 +903,7 @@ namespace yy {
 
   case 56:
 /* Line 670 of lalr1.cc  */
-#line 461 "parser.y"
+#line 462 "parser.y"
     {
 	(yyval.expression) = new Void_Empty_Expression;
 }
@@ -911,7 +911,7 @@ namespace yy {
 
   case 57:
 /* Line 670 of lalr1.cc  */
-#line 464 "parser.y"
+#line 465 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 }
@@ -919,7 +919,7 @@ namespace yy {
 
   case 58:
 /* Line 670 of lalr1.cc  */
-#line 472 "parser.y"
+#line 473 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 	
@@ -928,7 +928,7 @@ namespace yy {
 
   case 59:
 /* Line 670 of lalr1.cc  */
-#line 476 "parser.y"
+#line 477 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].constant_symbol); 
 }
@@ -936,7 +936,7 @@ namespace yy {
 
   case 60:
 /* Line 670 of lalr1.cc  */
-#line 479 "parser.y"
+#line 480 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 }
@@ -944,7 +944,7 @@ namespace yy {
 
   case 61:
 /* Line 670 of lalr1.cc  */
-#line 482 "parser.y"
+#line 483 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 	
@@ -953,7 +953,7 @@ namespace yy {
 
   case 62:
 /* Line 670 of lalr1.cc  */
-#line 486 "parser.y"
+#line 487 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 }
@@ -961,7 +961,7 @@ namespace yy {
 
   case 63:
 /* Line 670 of lalr1.cc  */
-#line 489 "parser.y"
+#line 490 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 }
@@ -969,7 +969,7 @@ namespace yy {
 
   case 64:
 /* Line 670 of lalr1.cc  */
-#line 492 "parser.y"
+#line 493 "parser.y"
     { 
 	(yyval.expression) = new Addition_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 }
@@ -977,7 +977,7 @@ namespace yy {
 
   case 65:
 /* Line 670 of lalr1.cc  */
-#line 495 "parser.y"
+#line 496 "parser.y"
     { 
 	(yyval.expression) = new Subtraction_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 	
@@ -987,7 +987,7 @@ namespace yy {
 
   case 66:
 /* Line 670 of lalr1.cc  */
-#line 500 "parser.y"
+#line 501 "parser.y"
     { 
 	(yyval.expression) = new Multiplication_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 	
@@ -997,7 +997,7 @@ namespace yy {
 
   case 67:
 /* Line 670 of lalr1.cc  */
-#line 505 "parser.y"
+#line 506 "parser.y"
     { 
 	(yyval.expression) = new Modulo_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 	
@@ -1007,7 +1007,7 @@ namespace yy {
 
   case 68:
 /* Line 670 of lalr1.cc  */
-#line 510 "parser.y"
+#line 511 "parser.y"
     { 
 	(yyval.expression) = new Division_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 	
@@ -1017,7 +1017,7 @@ namespace yy {
 
   case 69:
 /* Line 670 of lalr1.cc  */
-#line 516 "parser.y"
+#line 517 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::GREATER);
 }
@@ -1025,7 +1025,7 @@ namespace yy {
 
   case 70:
 /* Line 670 of lalr1.cc  */
-#line 519 "parser.y"
+#line 520 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::LESS);
 }
@@ -1033,7 +1033,7 @@ namespace yy {
 
   case 71:
 /* Line 670 of lalr1.cc  */
-#line 522 "parser.y"
+#line 523 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::GREATER_EQUAL);
 }
@@ -1041,7 +1041,7 @@ namespace yy {
 
   case 72:
 /* Line 670 of lalr1.cc  */
-#line 525 "parser.y"
+#line 526 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::LESS_EQUAL);
 }
@@ -1049,7 +1049,7 @@ namespace yy {
 
   case 73:
 /* Line 670 of lalr1.cc  */
-#line 528 "parser.y"
+#line 529 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::AND);
 }
@@ -1057,7 +1057,7 @@ namespace yy {
 
   case 74:
 /* Line 670 of lalr1.cc  */
-#line 531 "parser.y"
+#line 532 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::OR);
 }
@@ -1065,7 +1065,7 @@ namespace yy {
 
   case 75:
 /* Line 670 of lalr1.cc  */
-#line 534 "parser.y"
+#line 535 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::EQUAL);
 }
@@ -1073,7 +1073,7 @@ namespace yy {
 
   case 76:
 /* Line 670 of lalr1.cc  */
-#line 537 "parser.y"
+#line 538 "parser.y"
     {
 	(yyval.expression) = new Relational_Binary_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression), Operators::NOT_EQUAL);
 }
@@ -1081,7 +1081,7 @@ namespace yy {
 
   case 77:
 /* Line 670 of lalr1.cc  */
-#line 541 "parser.y"
+#line 542 "parser.y"
     {
 	(yyval.expression) = new Unary_Not_Expression((yysemantic_stack_[(2) - (2)].expression));
 }
@@ -1089,7 +1089,7 @@ namespace yy {
 
   case 78:
 /* Line 670 of lalr1.cc  */
-#line 544 "parser.y"
+#line 545 "parser.y"
     {
 	(yyval.expression) = new Unary_Negate_Expression((yysemantic_stack_[(2) - (2)].expression));
 }
@@ -1097,7 +1097,7 @@ namespace yy {
 
   case 79:
 /* Line 670 of lalr1.cc  */
-#line 547 "parser.y"
+#line 548 "parser.y"
     {
 	(yyval.expression) = new Pre_Increment_Expression((yysemantic_stack_[(2) - (2)].expression));
 }
@@ -1105,7 +1105,7 @@ namespace yy {
 
   case 80:
 /* Line 670 of lalr1.cc  */
-#line 550 "parser.y"
+#line 551 "parser.y"
     {
 	(yyval.expression) = new Pre_Decrement_Expression((yysemantic_stack_[(2) - (2)].expression));
 }
@@ -1113,7 +1113,7 @@ namespace yy {
 
   case 81:
 /* Line 670 of lalr1.cc  */
-#line 553 "parser.y"
+#line 554 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(3) - (2)].expression);
 }
@@ -1121,7 +1121,7 @@ namespace yy {
 
   case 82:
 /* Line 670 of lalr1.cc  */
-#line 561 "parser.y"
+#line 562 "parser.y"
     {
 	(yyval.expression) = new Assignment_Expression((yysemantic_stack_[(3) - (1)].expression), (yysemantic_stack_[(3) - (3)].expression));
 	
@@ -1130,7 +1130,7 @@ namespace yy {
 
   case 83:
 /* Line 670 of lalr1.cc  */
-#line 568 "parser.y"
+#line 569 "parser.y"
     {
 	(yyval.expression) = (yysemantic_stack_[(1) - (1)].expression);
 }
@@ -1138,7 +1138,7 @@ namespace yy {
 
   case 84:
 /* Line 670 of lalr1.cc  */
-#line 574 "parser.y"
+#line 575 "parser.y"
     {
 	(yyval.expression) = new Field_Access_Expression((yysemantic_stack_[(1) - (1)].identifier));
 	
@@ -1147,15 +1147,15 @@ namespace yy {
 
   case 85:
 /* Line 670 of lalr1.cc  */
-#line 578 "parser.y"
+#line 579 "parser.y"
     {
-	(yyval.expression) = new Field_Access_Expression((yysemantic_stack_[(1) - (1)].identifier));
+	(yyval.expression) = new State_Field_Access_Expression((yysemantic_stack_[(1) - (1)].identifier));
 }
     break;
 
   case 86:
 /* Line 670 of lalr1.cc  */
-#line 581 "parser.y"
+#line 582 "parser.y"
     {
 	(yyval.expression) = new Field_Access_Expression((yysemantic_stack_[(3) - (3)].identifier), (yysemantic_stack_[(3) - (1)].expression));
 	(yysemantic_stack_[(3) - (3)].identifier).destroy();
@@ -1164,7 +1164,7 @@ namespace yy {
 
   case 87:
 /* Line 670 of lalr1.cc  */
-#line 585 "parser.y"
+#line 586 "parser.y"
     {
 	(yyval.expression) = new Field_Access_Expression((yysemantic_stack_[(1) - (1)].identifier));
 }
@@ -1172,7 +1172,7 @@ namespace yy {
 
   case 88:
 /* Line 670 of lalr1.cc  */
-#line 591 "parser.y"
+#line 592 "parser.y"
     {
 	(yyval.expression) = new Call_Expression((yysemantic_stack_[(4) - (1)].identifier), (yysemantic_stack_[(4) - (3)].arguments));
 }
@@ -1180,7 +1180,7 @@ namespace yy {
 
   case 89:
 /* Line 670 of lalr1.cc  */
-#line 594 "parser.y"
+#line 595 "parser.y"
     {
 	(yyval.expression) = new Call_Expression((yysemantic_stack_[(7) - (1)].identifier), (yysemantic_stack_[(7) - (3)].state_id), (yysemantic_stack_[(7) - (6)].arguments));
 }
@@ -1188,7 +1188,7 @@ namespace yy {
 
   case 90:
 /* Line 670 of lalr1.cc  */
-#line 597 "parser.y"
+#line 598 "parser.y"
     {
 	(yyval.expression) = new Wrangler_Directive((yysemantic_stack_[(4) - (1)].identifier), (yysemantic_stack_[(4) - (3)].arguments));
 }
@@ -1196,7 +1196,7 @@ namespace yy {
 
   case 91:
 /* Line 670 of lalr1.cc  */
-#line 600 "parser.y"
+#line 601 "parser.y"
     {
 	(yyval.expression) = new Filter_Call_Expression((yysemantic_stack_[(4) - (1)].identifier), (yysemantic_stack_[(4) - (3)].arguments));
 }
@@ -1204,7 +1204,7 @@ namespace yy {
 
   case 92:
 /* Line 670 of lalr1.cc  */
-#line 603 "parser.y"
+#line 604 "parser.y"
     {
 	(yyval.expression) = new Call_Expression((yysemantic_stack_[(6) - (1)].expression), (yysemantic_stack_[(6) - (3)].identifier), (yysemantic_stack_[(6) - (5)].arguments));
 }
@@ -1212,7 +1212,7 @@ namespace yy {
 
   case 93:
 /* Line 670 of lalr1.cc  */
-#line 610 "parser.y"
+#line 611 "parser.y"
     {
 	(yyval.expression) = new Aggregate_Value_Symbol(*(yysemantic_stack_[(3) - (2)].arguments));
 	(yysemantic_stack_[(3) - (2)].arguments).destroy();
@@ -1221,19 +1221,19 @@ namespace yy {
 
   case 94:
 /* Line 670 of lalr1.cc  */
-#line 620 "parser.y"
+#line 621 "parser.y"
     {(yyval.arguments) = new Arguments;}
     break;
 
   case 95:
 /* Line 670 of lalr1.cc  */
-#line 621 "parser.y"
+#line 622 "parser.y"
     {(yyval.arguments) = (yysemantic_stack_[(1) - (1)].arguments);}
     break;
 
   case 96:
 /* Line 670 of lalr1.cc  */
-#line 625 "parser.y"
+#line 626 "parser.y"
     {
 	(yyval.arguments) = (yysemantic_stack_[(1) - (1)].arguments);
 	
@@ -1242,7 +1242,7 @@ namespace yy {
 
   case 97:
 /* Line 670 of lalr1.cc  */
-#line 631 "parser.y"
+#line 632 "parser.y"
     {
 	(yyval.arguments) = new Arguments;
 	(yyval.arguments)->push_back((yysemantic_stack_[(1) - (1)].expression));
@@ -1252,7 +1252,7 @@ namespace yy {
 
   case 98:
 /* Line 670 of lalr1.cc  */
-#line 636 "parser.y"
+#line 637 "parser.y"
     {
 	(yyval.arguments) = (yysemantic_stack_[(3) - (1)].arguments);
 	
@@ -1263,7 +1263,7 @@ namespace yy {
 
   case 99:
 /* Line 670 of lalr1.cc  */
-#line 645 "parser.y"
+#line 646 "parser.y"
     {
 	(yyval.constant_symbol) = (yysemantic_stack_[(1) - (1)].constant_symbol);
 }
@@ -1271,25 +1271,25 @@ namespace yy {
 
   case 100:
 /* Line 670 of lalr1.cc  */
-#line 648 "parser.y"
+#line 649 "parser.y"
     {(yyval.constant_symbol) = (yysemantic_stack_[(1) - (1)].constant_symbol);}
     break;
 
   case 101:
 /* Line 670 of lalr1.cc  */
-#line 649 "parser.y"
+#line 650 "parser.y"
     {(yyval.constant_symbol) = (yysemantic_stack_[(1) - (1)].constant_symbol);  }
     break;
 
   case 102:
 /* Line 670 of lalr1.cc  */
-#line 650 "parser.y"
+#line 651 "parser.y"
     {(yyval.constant_symbol) = (yysemantic_stack_[(1) - (1)].string_constant); }
     break;
 
   case 103:
 /* Line 670 of lalr1.cc  */
-#line 651 "parser.y"
+#line 652 "parser.y"
     {
 	(yyval.constant_symbol) = new String_Constant_Symbol((yysemantic_stack_[(4) - (3)].identifier)->identifier_name(), (yyloc));
 	(yysemantic_stack_[(4) - (3)].identifier).destroy();
@@ -1298,7 +1298,7 @@ namespace yy {
 
   case 104:
 /* Line 670 of lalr1.cc  */
-#line 658 "parser.y"
+#line 659 "parser.y"
     {
 	(yyval.identifier) = (yysemantic_stack_[(1) - (1)].identifier);
 }
@@ -1306,7 +1306,7 @@ namespace yy {
 
   case 105:
 /* Line 670 of lalr1.cc  */
-#line 661 "parser.y"
+#line 662 "parser.y"
     {
 	(yyval.identifier) = (yysemantic_stack_[(1) - (1)].identifier);
 }
@@ -1314,7 +1314,7 @@ namespace yy {
 
   case 106:
 /* Line 670 of lalr1.cc  */
-#line 664 "parser.y"
+#line 665 "parser.y"
     {
 	(yyval.identifier) = (yysemantic_stack_[(1) - (1)].identifier);
 }
@@ -1871,17 +1871,17 @@ namespace yy {
   const unsigned short int
   Rule_Parsing_Unit::yyrline_[] =
   {
-         0,   206,   206,   213,   217,   224,   227,   233,   237,   244,
-     253,   259,   262,   268,   274,   277,   280,   284,   287,   294,
-     298,   305,   308,   314,   317,   321,   324,   330,   335,   338,
-     341,   344,   350,   355,   358,   364,   367,   371,   378,   379,
-     385,   392,   402,   408,   415,   419,   425,   435,   436,   437,
-     438,   439,   440,   443,   449,   453,   461,   464,   472,   476,
-     479,   482,   486,   489,   492,   495,   500,   505,   510,   516,
-     519,   522,   525,   528,   531,   534,   537,   541,   544,   547,
-     550,   553,   561,   568,   574,   578,   581,   585,   591,   594,
-     597,   600,   603,   610,   620,   621,   625,   631,   636,   645,
-     648,   649,   650,   651,   658,   661,   664
+         0,   207,   207,   214,   218,   225,   228,   234,   238,   245,
+     254,   260,   263,   269,   275,   278,   281,   285,   288,   295,
+     299,   306,   309,   315,   318,   322,   325,   331,   336,   339,
+     342,   345,   351,   356,   359,   365,   368,   372,   379,   380,
+     386,   393,   403,   409,   416,   420,   426,   436,   437,   438,
+     439,   440,   441,   444,   450,   454,   462,   465,   473,   477,
+     480,   483,   487,   490,   493,   496,   501,   506,   511,   517,
+     520,   523,   526,   529,   532,   535,   538,   542,   545,   548,
+     551,   554,   562,   569,   575,   579,   582,   586,   592,   595,
+     598,   601,   604,   611,   621,   622,   626,   632,   637,   646,
+     649,   650,   651,   652,   659,   662,   665
   };
 
   // Print the state stack on the debug stream.
@@ -1975,7 +1975,7 @@ namespace yy {
 /* Line 1141 of lalr1.cc  */
 #line 1977 "rule_parsing_unit.cc"
 /* Line 1142 of lalr1.cc  */
-#line 668 "parser.y"
+#line 669 "parser.y"
 
 
 /* The closing %% above marks the end of the Rules section and the beginning
