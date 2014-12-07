@@ -19,7 +19,7 @@
 //
 #include "J_Symbol_Error.h"
 using std::bind; using std::equal_to; using std::none_of;
-using namespace std::placeholders; using std::to_string;
+using namespace std::placeholders; 
 
 //Containers
 #include <array>

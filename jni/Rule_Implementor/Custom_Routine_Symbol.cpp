@@ -18,7 +18,9 @@
 using std::transform;
 using std::string;
 
-using std::to_string;
+
+//
+#include <J_String.h>
 namespace jomike{
 
 

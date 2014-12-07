@@ -5,8 +5,9 @@
 //
 #include <string>
 
-#pragma comment(lib, "J_Utile"J_LIB_APPEND)
-
+#ifdef VS_STUDIO
+#pragma comment(lib, "J_Utile" J_LIB_APPEND)
+#endif
 namespace jomike{};
 namespace jtl = jomike;
 

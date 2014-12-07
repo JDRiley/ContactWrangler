@@ -85,31 +85,12 @@ private:
 
 	j_value derived_get_value(const Arguments& i_args)const override;
 
-	template<int T_index = 0>
-	typename std::enable_if < static_cast<bool>(T_index < sizeof...(Args_t)), void>::type
-		set_tuple_helper(std::tuple<Args_t...>* i_arg_tuple, const Arguments& irk_args)const{
-		i_arg_tuple->get<T_index>() = irk_args[T_index].get_value()
-			.as_type<typename std::tuple_element<T_index, std::tuple<Args_t...>>::type>();
 
-		set_tuple<T_index + 1, Args_t...>(i_arg_tuple, irk_args);
-	}
-
-	//template<int T_index = 0>
-	//typename std::enable_if < T_index == sizeof...(Args_t), void>::type
-	//	set_tuple_helper(std::tuple<Args_t...>* i_arg_tuple, const Arguments& irk_args)const{
-	//	i_arg_tuple->get<T_index>() = irk_args[T_index].get_value()
-	//		.as_type<typename std::tuple_element<T_index, std::tuple<Args_t...>>::type>();
-
-	//	
-	//}
 
 	template<j_size_t... Indicis>
 	j_value get_value_helper(const Arguments& irk_args, integer_sequence<j_size_t, Indicis...>)const;
 
-	void
-		set_tuple(std::tuple<Args_t...>* i_arg_tuple, const Arguments& irk_args)const{
-			set_tuple_helper(i_arg_tuple, irk_args);
-	}
+
 
 
 
@@ -134,26 +115,6 @@ N_Ary_Function_Symbol<Ret_t, Args_t...>::N_Ary_Function_Symbol(
 	set_args(Arguments(sizeof...(Args_t)));
 }
 
-template<typename Iter_t>
-class self_incrementing_iter{
-public:
-	self_incrementing_iter(Iter_t i_iter):M_iter(i_iter){}
-
-	typedef typename Iter_t::pointer pointer;
-	typedef typename Iter_t::reference reference;
-
-	reference operator*(){
-		return *M_iter++;
-	}
-	
-	pointer operator->(){
-
-		return M_iter++operator->();
-	}
-
-private:
-	Iter_t M_iter;
-};
 
 template<typename Num_t, Num_t... M_nums>
 class integer_sequence{};
@@ -200,9 +161,12 @@ j_value N_Ary_Function_Symbol<Ret_t, Args_t...>::get_value_helper(const Argument
 	/*std::tuple<Args_t...> tuple(irk_args[Indicis].get_value()
 								.as_type<std::tuple_element<Indicis, std::tuple<Args_t...>>::type>()...);
 	*/
+
+	
+	
 	return j_value(M_function(
 		//this next line is being parameter pack expanded over the integer_equence Indicis
-		//We get the Indicis by template matching the unamed integer sequence argument
+		//We get the Indicis by template matching the unamed integer_sequence argument
 		irk_args[Indicis].get_value().as_type<std::tuple_element<Indicis, std::tuple<Args_t...>>::type>()...
 		)
 		, J_Unit());

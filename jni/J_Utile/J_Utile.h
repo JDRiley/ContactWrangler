@@ -2,12 +2,15 @@
 #define J_UTILE_H
 
 #include <J_Fwd_Decl.h>
-
+//
+#include <limits>
 //IO Facilities
 #include <iosfwd>
 
-#pragma comment(lib, "J_Utile"J_LIB_APPEND)
+#ifdef VS_STUDIO
+#pragma comment(lib, "J_Utile" J_LIB_APPEND)
 
+#endif
 namespace jomike{
 
 
@@ -115,7 +118,7 @@ J_Duration_Tester<Time_Retrieval_t1, Time_Retrieval_t2, Num_t>
 			, Time_Retrieval_t2
 			, decltype(Time_Retrieval_t1()())> duration_tester_t;
 
-		return duration_tester_t(irk_cur_time_retriever, irk_duration_retriever, i_duration)
+		return duration_tester_t(irk_cur_time_retriever, irk_duration_retriever, i_duration);
 
 }
 #endif

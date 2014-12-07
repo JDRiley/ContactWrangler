@@ -1,7 +1,7 @@
 package com.sirvigorous.contactwrangler;
 
 
-import com.sirvigorous.contactwrangler.Contact_List_Activity;
+import com.sirvigorous.contactwrangler.Contacts_Wrangler_Activity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -210,7 +210,7 @@ private void save_contact(){
 
 	if(M_lady_contact == null){
 		// insert the contact information into the database
-		M_lady_contact = new Contact((Contact_List_Activity)getActivity()
+		M_lady_contact = new Contact((Contacts_Wrangler_Activity)getActivity()
 				, M_name_edit_text.getText().toString(),
 				M_location_met_edit_text.getText().toString(),
 				M_phone_number,

@@ -8,14 +8,17 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#ifdef VS_STUDIO
 #include <vld\vld.h> 
 
+
+#endif
 
 #undef ERROR
 #undef max
 #undef min
 #else
-static_assert(0, "No VLD Found");
+//static_assert(0, "No VLD Found");
 #endif
 
 #include <memory>
@@ -55,6 +58,8 @@ typedef int j_size_t;
 #elif _M_X64
 
 typedef long long j_size_t;
+#else
+typedef int j_size_t;
 #endif
 
 
@@ -65,8 +70,14 @@ typedef unsigned long j_ulint;
 typedef unsigned char j_ubyte;
 typedef double j_dbl;
 typedef double Dbl_t;
+
+#ifdef VS_STUDIO
 typedef int32_t j_int;
 typedef int16_t j_short;
+#else
+typedef int j_int;
+typedef short j_short;
+#endif
 typedef long long j_llint;
 
 const j_size_t J_SIZE_T_ZERO = 0;

@@ -74,30 +74,6 @@ public:
 	typename std::remove_cv<typename std::remove_reference<Val_t>::type>::type
 		as_type()const;
 
-	template<>
-	j_llint as_type<j_llint>()const{
-		return as_llint();
-	}
-
-	template<>
-	j_dbl as_type<j_dbl>()const{
-		return as_double();
-	}
-
-	template<>
-	bool as_type<bool>()const{
-		return as_bool();
-	}
-
-	template<>
-	std::string as_type<std::string>()const{
-		return as_string();
-	}
-
-	template<>
-	std::string as_type<const std::string&>()const{
-		return as_string();
-	}
 	
 	
 	static const j_value& void_type();
@@ -180,8 +156,8 @@ private:
 	template<typename Ret_t>
 	Ret_t cast_to()const;
 
-	template<>
-	std::string cast_to()const;
+	//template<>
+	//std::string cast_to()const;
 
 	template<class Operator_Class>
 	typename Operator_Class::return_type
@@ -200,6 +176,30 @@ private:
 };
 
 
+template<>
+j_llint j_value::as_type<j_llint>()const{
+	return as_llint();
+}
+
+template<>
+j_dbl j_value::as_type<j_dbl>()const{
+	return as_double();
+}
+
+template<>
+bool j_value::as_type<bool>()const{
+	return as_bool();
+}
+
+template<>
+std::string j_value::as_type<std::string>()const{
+	return as_string();
+}
+
+template<>
+std::string j_value::as_type<const std::string&>()const{
+	return as_string();
+}
 
 
 j_dbl unit_conversion(const j_value&, J_Unit);

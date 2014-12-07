@@ -1,9 +1,7 @@
 #ifndef DATA_FILE_H
 #define DATA_FILE_H
 
-#include "math_base.h"
-
-#include <J_Fwd_Decl.h>
+#include <math_base.h>
 
 #include <iosfwd>
 

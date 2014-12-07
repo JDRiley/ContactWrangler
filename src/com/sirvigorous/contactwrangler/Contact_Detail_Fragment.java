@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 /**
  * A fragment representing a single Lady detail screen. This fragment is either
- * contained in a {@link Contact_List_Activity} in two-pane mode (on tablets) or a
+ * contained in a {@link Contacts_Wrangler_Activity} in two-pane mode (on tablets) or a
  * {@link Contact_Detail_Activity} on hand-sets.
  */
 public class Contact_Detail_Fragment extends Fragment {
@@ -50,8 +50,8 @@ public class Contact_Detail_Fragment extends Fragment {
 		
 		if(savedInstanceState != null){
 			
-			set_contact(new Contact((Contact_List_Activity)getActivity()
-					, savedInstanceState.getLong(Contact_List_Activity.ROW_ID)));
+			set_contact(new Contact((Contacts_Wrangler_Activity)getActivity()
+					, savedInstanceState.getLong(Contacts_Wrangler_Activity.ROW_ID)));
 		}else{
 			assert(null != M_contact);
 			

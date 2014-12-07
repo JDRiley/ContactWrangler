@@ -5,6 +5,9 @@
 #include "J_RB_Tree.h"
 //
 #include "Pair_Key_Comparer.h"
+//
+#include <utility>
+
 namespace jomike{
 #ifdef RB_TREE_TESTING
 class RB_Tree_Tester;

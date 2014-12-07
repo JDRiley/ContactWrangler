@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.location.Location;
 
 import com.sirvigorous.contactwrangler.Database_Connector;
-import com.sirvigorous.contactwrangler.Contact_List_Activity;
+import com.sirvigorous.contactwrangler.Contacts_Wrangler_Activity;
 
 public class Contact{
 
@@ -14,9 +14,9 @@ private String M_location;
 private long M_phone_number;
 private String M_rule;
 private long M_row_id = -1;
-private Contact_List_Activity M_context;
+private Contacts_Wrangler_Activity M_context;
 
-public Contact(Contact_List_Activity i_context,
+public Contact(Contacts_Wrangler_Activity i_context,
 		String i_name, String i_location
 		, long i_phone_number, String i_rule){
 
@@ -28,7 +28,7 @@ public Contact(Contact_List_Activity i_context,
 	
 }
 
-public Contact(Contact_List_Activity i_context, long i_id){
+public Contact(Contacts_Wrangler_Activity i_context, long i_id){
 	M_context = i_context;
 	set_data_from_database_id(i_id);
 }

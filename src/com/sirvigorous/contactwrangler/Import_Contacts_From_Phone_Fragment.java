@@ -3,8 +3,7 @@ package com.sirvigorous.contactwrangler;
 
 import java.util.ArrayList;
 
-import android.R.integer;
-import android.R.string;
+
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.CursorLoader;
@@ -13,33 +12,23 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.widget.SimpleCursorAdapter;
 import android.provider.ContactsContract.Data;
 
-
-import android.database.MatrixCursor;
 public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 	
 
 	public interface Listener{
 		public void fragment_completed(boolean i_update_contacts);
-		
-		
-		public void update_contact_list();
 	};
 
 	private ListView M_list_view;
@@ -182,7 +171,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 	
 	
 
-	class Set_Contact_Numbers_Task extends AsyncTask<Cursor, Object, Cursor>{
+	private class Set_Contact_Numbers_Task extends AsyncTask<Cursor, Object, Cursor>{
 	
 	
 	
@@ -205,7 +194,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 			
 	
 			
-			String last_id = "";
+			//String last_id = "";
 			final int contact_id_index = all_phone_data_cursor.getColumnIndex(Phone.CONTACT_ID);
 			final int phone_number_index = all_phone_data_cursor.getColumnIndex(Phone.NORMALIZED_NUMBER);
 			final int display_name_index = all_phone_data_cursor.getColumnIndex(Phone.DISPLAY_NAME_PRIMARY);
@@ -215,9 +204,9 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 			
 			
 			while(all_phone_data_cursor.moveToNext()){
-				if(last_id.equals(all_phone_data_cursor.getString(contact_id_index))){
-					continue;
-				}
+				//if(last_id.equals(all_phone_data_cursor.getString(contact_id_index))){
+				//	continue;
+				//}
 
 				
 				
@@ -236,7 +225,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 					continue;
 				}
 				
-				last_id = contact_data_array[0]; 
+				//last_id = contact_data_array[0]; 
 				contacts_array.add(contact_data_array);
 				filled_matrix_cursor.addRow(contact_data_array);
 				++index;
@@ -293,7 +282,7 @@ public class Import_Contacts_From_Phone_Fragment extends ListFragment{
 			}
 			
 			Contact contact
-			= new Contact((Contact_List_Activity)getActivity(), get_display_name(i)
+			= new Contact((Contacts_Wrangler_Activity)getActivity(), get_display_name(i)
 					, "" , get_number(i), "Default");
 			
 			contacts.add(contact);

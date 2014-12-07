@@ -16,7 +16,7 @@
 #include "Aggregate_Value_Symbol.h"
 using std::equal;
 using std::string;
-using std::to_string;
+
 namespace jomike{
 
 j_value::j_value(j_llint i_val, J_Unit i_unit){
@@ -402,12 +402,24 @@ j_value::Value_Types j_value::type()const{
 	return M_type;
 }
 
-std::string j_value::as_string()const{
-	return cast_to<std::string>();
-}
-
-bool j_value::as_bool()const{
-	return cast_to<bool>();
+template<>
+std::string j_value::cast_to()const{
+	switch(M_type){
+	case j_value::Value_Types::LL_INTEGER:
+		return to_string(M_val.llint_val);
+	case j_value::Value_Types::DOUBLE:
+		return to_string(M_val.dbl_val);
+	case j_value::Value_Types::BOOL:
+		return M_val.bool_val ? "true" : "false";
+	case j_value::Value_Types::STRING:
+		return *M_val.str_val;
+	case j_value::Value_Types::AGGREGATE:
+		return M_val.aggregate_val->get_wrangler_str_val(empty_arguments());
+	case j_value::Value_Types::UNDEFINIED:
+		throw J_Value_Error("Undefined Value type");
+	default:
+		throw J_Value_Error("Could not convert type to string");
+	}
 }
 
 template<typename Ret_t>
@@ -437,25 +449,17 @@ Ret_t j_value::cast_to()const{
 
 }
 
-template<>
-std::string j_value::cast_to()const{
-	switch(M_type){
-	case j_value::Value_Types::LL_INTEGER:
-		return to_string(M_val.llint_val);
-	case j_value::Value_Types::DOUBLE:
-		return to_string(M_val.dbl_val);
-	case j_value::Value_Types::BOOL:
-		return M_val.bool_val ? "true" : "false";
-	case j_value::Value_Types::STRING:
-		return *M_val.str_val;
-	case j_value::Value_Types::AGGREGATE:
-		return M_val.aggregate_val->get_wrangler_str_val(empty_arguments());
-	case j_value::Value_Types::UNDEFINIED:
-		throw J_Value_Error("Undefined Value type");
-	default:
-		throw J_Value_Error("Could not convert type to string");
-	}
+std::string j_value::as_string()const{
+	return cast_to<std::string>();
 }
+
+bool j_value::as_bool()const{
+	return cast_to<bool>();
+}
+
+
+
+
 
 j_llint j_value::as_llint()const{
 

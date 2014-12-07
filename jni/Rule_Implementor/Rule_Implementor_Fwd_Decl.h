@@ -5,7 +5,7 @@
 #include <J_Fwd_Decl.h>
 
 #ifdef VSTUDIO
-#pragma comment(lib, "Rule_Implementor"J_LIB_APPEND)
+#pragma comment(lib, "Rule_Implementor" J_LIB_APPEND)
 #endif // VSTUDIO
 namespace jomike{
 

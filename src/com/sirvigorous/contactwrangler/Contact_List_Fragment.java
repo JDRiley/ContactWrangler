@@ -3,18 +3,14 @@ package com.sirvigorous.contactwrangler;
 
 import com.sirvigorous.contactwrangler.Database_Connector;
 import com.sirvigorous.contactwrangler.Contact;
-import com.sirvigorous.contactwrangler.Contact_List_Activity;
+import com.sirvigorous.contactwrangler.Contacts_Wrangler_Activity;
 
-import android.R.integer;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.database.Cursor;
 
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
@@ -22,7 +18,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
-
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 /**
  * A list fragment representing a list of Ladies. This fragment also supports
  * tablet devices by allowing list items to be given an 'activated' state upon
@@ -64,7 +62,6 @@ public class Contact_List_Fragment extends ListFragment {
 		
 		public void add_test();
 		
-		public void clear_contacts();
 	}
 
 	private Callback M_listener;
@@ -77,7 +74,7 @@ public class Contact_List_Fragment extends ListFragment {
 	    	  
 	    	  Cursor cursor = M_contact_adapter.getCursor();
 	    	  cursor.moveToPosition(i_position);
-	    	  M_listener.on_contact_selected(new Contact((Contact_List_Activity)getActivity(), cursor.getInt(
+	    	  M_listener.on_contact_selected(new Contact((Contacts_Wrangler_Activity)getActivity(), cursor.getInt(
 	    			  cursor.getColumnIndex(Database_Connector.ID_COLLUMN_STRING))));
 	      } 
 	   }; // end viewContactListener
@@ -206,44 +203,68 @@ public class Contact_List_Fragment extends ListFragment {
 	      super.onStop();
 	   } 
 
-	   // display this fragment's menu items
-	   @Override
-	   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-		   
-	      super.onCreateOptionsMenu(menu, inflater);
-	      inflater.inflate(R.menu.contact_list_menu, menu);
-	   }
 
-	   // handle choice from options menu
-	   @Override
-	   public boolean onOptionsItemSelected(MenuItem item) 
-	   {
-		   
-	      switch (item.getItemId())
-	      {
-	         case R.id.action_add_new_contact:
-	            M_listener.add_new_contact();
-	            return true;
-	         case R.id.add_test:
-	        	 M_listener.add_test();
-	        	 update_contact_list();
-	        	 return true;
-	         case R.id.clear_contacts:
-	        	 M_listener.clear_contacts();
-	        	 update_contact_list();
-	        	 return true;
-	         case R.id.action_import_contacts_from_phone:
-	        	 M_listener.add_contacts_from_phone();
-	        	 return true;
-	      }
-	      
-	      return super.onOptionsItemSelected(item); // call super's method
-	   }
+	
 	   
 	   // update data set
 	   public void update_contact_list(){
 		   setEmptyText(getResources().getString(R.string.loading_contacts));
 	      new Get_Contacts_Task().execute((Object[]) null);
 	   }
+	   
+	   @Override
+	   public void onCreateOptionsMenu(Menu menu, MenuInflater i_inflater){
+		   
+		   i_inflater.inflate(R.menu.contact_list_menu, menu);	
+		   super.onCreateOptionsMenu(menu, i_inflater);
+	      
+	   }
+
+	   // handle choice from options menu
+	   @Override
+	   public boolean onOptionsItemSelected(MenuItem item){
+	      switch (item.getItemId()){
+	         case R.id.action_add_new_contact:
+	            M_listener.add_new_contact();
+	            return true;
+	         case R.id.add_test:
+	        	 add_test();
+	        	 update_contact_list();
+	        	 return true;
+	         case R.id.clear_contacts:
+	        	 clear_contacts();
+	        	 update_contact_list();
+	        	 return true;
+	         case R.id.action_import_contacts_from_phone:
+	        	 add_contacts_from_phone();
+	        	 return true;
+	      }
+	      
+	      return super.onOptionsItemSelected(item); // call super's method
+	   }
+	   
+		
+		public void add_test(){
+			Database_Connector dc = new Database_Connector(getActivity());
+			dc.reset_table();
+			String[] rules = getResources().getStringArray(R.array.rule_name_array);
+			
+			
+			new Contact(this, "Adessa", "Theta Xi", 3017170839l, rules[0])
+				.update_to_database();
+			
+			
+			new Contact(this, "Jasmine", "Other Xi", 15555555554l, rules[0])
+				.update_to_database();;
+			
+			new Contact(this, "Danielle", "House Party", 2024576288l, rules[1])
+				.update_to_database();;
+			
+			new Contact(this, "Tamera", "Planet Xenon", 7647418799l, rules[2])
+				.update_to_database();
+			
+			update_contact_list();
+				
+		}
 	
 }

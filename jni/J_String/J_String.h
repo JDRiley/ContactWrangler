@@ -15,8 +15,22 @@
 //
 #include <sstream>
 
+#ifdef VS_STUDIO
+#pragma comment(lib, "J_String" J_LIB_APPEND)
+#endif
 
-#pragma comment(lib, "J_String"J_LIB_APPEND)
+
+
+#ifdef VS_STUDIO
+#define STRING_CONVERSION_FUNCTIONS_ENABLED 1
+#elif _GLIBCXX_USE_C99
+#define STRING_CONVERSION_FUNCTIONS_ENABLED 1
+#endif
+
+
+#ifndef STRING_CONVERSION_FUNCTIONS_ENABLED
+#include <sstream>
+#endif
 
 namespace jomike{
 
@@ -25,8 +39,16 @@ typedef std::basic_string<j_ulint> LU_String;
 
 std::string file_to_str(const std::string& irk_filename);
 
-
-
+template<typename St>
+std::string to_string(St i_val){
+#if STRING_CONVERSION_FUNCTIONS_ENABLED
+	return std::to_string(i_val);
+#else
+	std::ostringstream o_str;
+	o_str << i_val;
+	return o_str.str();
+#endif
+}
 
 j_dbl read_double_and_advance(LU_String::const_iterator*, int);
 
@@ -56,7 +78,7 @@ Iter get_word(Iter i_pos, Iter i_end, String* ik_string
 
 template<typename Char_t>
 std::string to_std_string(const std::basic_string<Char_t>& irk_string){
-	string new_string;
+	std::string new_string;
 	for(auto f_char : irk_string){
 		new_string.push_back(safe_char_cast(f_char));
 	}
