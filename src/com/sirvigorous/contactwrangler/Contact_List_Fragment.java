@@ -59,8 +59,7 @@ public class Contact_List_Fragment extends ListFragment {
 		public void add_contacts_from_phone();
 		
 		public void add_new_contact();
-		
-		public void add_test();
+
 		
 	}
 
@@ -236,31 +235,34 @@ public class Contact_List_Fragment extends ListFragment {
 	        	 update_contact_list();
 	        	 return true;
 	         case R.id.action_import_contacts_from_phone:
-	        	 add_contacts_from_phone();
+	        	 M_listener.add_contacts_from_phone();
 	        	 return true;
 	      }
 	      
 	      return super.onOptionsItemSelected(item); // call super's method
 	   }
 	   
-		
+		void clear_contacts(){
+			System.out.println("Unimplemented");
+			
+		}
 		public void add_test(){
 			Database_Connector dc = new Database_Connector(getActivity());
 			dc.reset_table();
 			String[] rules = getResources().getStringArray(R.array.rule_name_array);
 			
 			
-			new Contact(this, "Adessa", "Theta Xi", 3017170839l, rules[0])
+			new Contact((Contacts_Wrangler_Activity)getActivity(), "Adessa", "Theta Xi", 3017170839l, rules[0])
 				.update_to_database();
 			
 			
-			new Contact(this, "Jasmine", "Other Xi", 15555555554l, rules[0])
+			new Contact((Contacts_Wrangler_Activity)getActivity(), "Jasmine", "Other Xi", 15555555554l, rules[0])
 				.update_to_database();;
 			
-			new Contact(this, "Danielle", "House Party", 2024576288l, rules[1])
+			new Contact((Contacts_Wrangler_Activity)getActivity(), "Danielle", "House Party", 2024576288l, rules[1])
 				.update_to_database();;
 			
-			new Contact(this, "Tamera", "Planet Xenon", 7647418799l, rules[2])
+			new Contact((Contacts_Wrangler_Activity)getActivity(), "Tamera", "Planet Xenon", 7647418799l, rules[2])
 				.update_to_database();
 			
 			update_contact_list();

@@ -1,10 +1,10 @@
 package com.sirvigorous.contactwrangler;
 
 import android.app.Fragment;
-
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -67,25 +67,26 @@ static public final String ROW_ID = "Contact_database_row_id";
 		M_drawer_list.setOnItemClickListener(new DrawerItemClickListener());
 		
 		
+		
 		M_drawer_toggler =  new ActionBarDrawerToggle(this, M_drawer_layout,
-		           R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+				R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
-		        /** Called when a drawer has settled in a completely closed state. */
-		        public void onDrawerClosed(View view) {
-		            super.onDrawerClosed(view);
-		            getActionBar().setTitle(M_title);
-		            invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-		        }
+				/** Called when a drawer has settled in a completely closed state. */
+					public void onDrawerClosed(View view) {
+						super.onDrawerClosed(view);
+						getActionBar().setTitle(M_title);
+						invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+					}
 
-		        /** Called when a drawer has settled in a completely open state. */
-		        public void onDrawerOpened(View drawerView) {
-		            super.onDrawerOpened(drawerView);
-		            getActionBar().setTitle(M_drawer_title);
-		            invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-		        }
-		    };
-		    
-		    M_drawer_layout.setDrawerListener(M_drawer_toggler);
+					/** Called when a drawer has settled in a completely open state. */
+					public void onDrawerOpened(View drawerView) {
+						super.onDrawerOpened(drawerView);
+						getActionBar().setTitle(M_drawer_title);
+						invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+					}
+		};
+		
+		M_drawer_layout.setDrawerListener(M_drawer_toggler);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		
@@ -220,6 +221,7 @@ public void setTitle(CharSequence title) {
 
 
 
+
 	/**
 	 * When using the ActionBarDrawerToggle, you must call it during
 	 * onPostCreate() and onConfigurationChanged()...
@@ -248,6 +250,10 @@ public void setTitle(CharSequence title) {
 	private ActionBarDrawerToggle M_drawer_toggler;
 	private CharSequence M_drawer_title;
 
+	@Override
+	 public boolean onCreateOptionsMenu(Menu menu){
+		return super.onCreateOptionsMenu(menu);
+	}
 }
 
 
