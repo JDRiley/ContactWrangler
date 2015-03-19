@@ -34,10 +34,10 @@ public:
 	j_value(const std::string&, J_Unit);
 	j_value(const j_value&, J_Unit);
 
-	
 
-	enum class Value_Types{LL_INTEGER, DOUBLE, BOOL, STRING, VOID, AGGREGATE, UNDEFINIED};
-	
+
+	enum class Value_Types{ LL_INTEGER, DOUBLE, BOOL, STRING, VOID, AGGREGATE, UNDEFINIED };
+
 
 
 	//Value_Union M_val;
@@ -69,13 +69,37 @@ public:
 	bool value_status()const;
 
 	J_Unit units()const;
-	
+
 	template<typename Val_t>
 	typename std::remove_cv<typename std::remove_reference<Val_t>::type>::type
 		as_type()const;
 
-	
-	
+	template<>
+	j_llint as_type<j_llint>()const{
+		return as_llint();
+	}
+
+	template<>
+	j_dbl as_type<j_dbl>()const{
+		return as_double();
+	}
+
+	template<>
+	bool as_type<bool>()const{
+		return as_bool();
+	}
+
+	template<>
+	std::string as_type<std::string>()const{
+		return as_string();
+	}
+
+	template<>
+	std::string as_type<const std::string&>()const{
+		return as_string();
+	}
+
+
 	static const j_value& void_type();
 
 	std::string to_str()const;
@@ -85,7 +109,7 @@ public:
 	j_value& operator-=(const j_value&);
 	j_value& operator*=(const j_value&);
 	j_value& operator/=(const j_value&);
-
+	j_value& operator%=(const j_value&);;
 	j_value& operator++();
 	j_value& operator--();
 
@@ -105,7 +129,7 @@ public:
 	void clear();
 	~j_value();
 private:
-	
+
 	j_value(Value_Types i_type);
 
 	union Value_Union{
@@ -129,10 +153,6 @@ private:
 	template<class Operator_Class>
 	void binary_value_operation_no_str_or_bool(
 		const j_value& i_right, const Operator_Class&);
-	
-	template<class Operator_Class>
-	void binary_value_operation_llint(
-		const j_value& i_right, const Operator_Class&);
 
 	template<class Operator_Class>
 	void binary_value_operation_no_str(
@@ -146,18 +166,18 @@ private:
 	void binary_value_operation(
 		const Left_t& i_left, const j_value& i_right, Ret_t* i_destination
 		, const Operator_Class& i_func);
-	
-	
+
+
 	template<typename Operator_Class>
 	bool self_manipulation_operator_numeric(Operator_Class i_func);
-	
+
 
 
 	template<typename Ret_t>
 	Ret_t cast_to()const;
 
-	//template<>
-	//std::string cast_to()const;
+	template<>
+	std::string cast_to()const;
 
 	template<class Operator_Class>
 	typename Operator_Class::return_type
@@ -171,35 +191,11 @@ private:
 	friend j_value operator>=(const j_value& irk_left, const j_value& irk_right);
 	friend j_value operator==(const j_value& irk_left, const j_value& irk_right);
 	friend j_value operator!=(const j_value& irk_left, const j_value& irk_right);
-	friend j_value operator%(const j_value& irk_left, const j_value& irk_right);
 
+	friend j_value operator%(const j_value& irk_left, const j_value& irk_right);
 };
 
 
-template<>
-j_llint j_value::as_type<j_llint>()const{
-	return as_llint();
-}
-
-template<>
-j_dbl j_value::as_type<j_dbl>()const{
-	return as_double();
-}
-
-template<>
-bool j_value::as_type<bool>()const{
-	return as_bool();
-}
-
-template<>
-std::string j_value::as_type<std::string>()const{
-	return as_string();
-}
-
-template<>
-std::string j_value::as_type<const std::string&>()const{
-	return as_string();
-}
 
 
 j_dbl unit_conversion(const j_value&, J_Unit);

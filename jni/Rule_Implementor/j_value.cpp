@@ -12,11 +12,9 @@
 #include <J_String.h>
 //
 #include "Operators.h"
-//
-#include "Aggregate_Value_Symbol.h"
 using std::equal;
 using std::string;
-
+using std::to_string;
 namespace jomike{
 
 j_value::j_value(j_llint i_val, J_Unit i_unit){
@@ -143,9 +141,9 @@ void j_value::binary_value_operation(
 //division and multiplication
 template<typename Operator_Class>
 void j_value::binary_value_operation_no_str_or_bool(
-	const j_value& i_right, const Operator_Class& i_func){
+	const j_value& irk_right, const Operator_Class& i_func){
 
-	j_value right_val(i_right);
+	j_value right_val(irk_right);
 
 	if(type() != right_val.type()){
 		convert_to_same_type(this, &right_val);
@@ -157,11 +155,11 @@ void j_value::binary_value_operation_no_str_or_bool(
 	switch(M_type){
 	case Value_Types::LL_INTEGER:
 		binary_value_operation(
-			M_val.llint_val, i_right, &M_val.llint_val, i_func);
+			M_val.llint_val, right_val, &M_val.llint_val, i_func);
 		break;
 	case Value_Types::DOUBLE:
 		binary_value_operation(
-			M_val.dbl_val, i_right, &M_val.dbl_val, i_func);
+			M_val.dbl_val, right_val, &M_val.dbl_val, i_func);
 		break;
 	case Value_Types::BOOL:
 		throw J_Value_Error("Bool in wrong binary value_operation function");
@@ -274,11 +272,6 @@ j_value::j_value(Value_Types i_type):M_type(i_type){
 
 }
 
-j_value::j_value(const Aggregate_Value_Symbol& irk_val)
-:M_type(Value_Types::AGGREGATE){
-	M_val.aggregate_val = irk_val.get_copy();
-}
-
 template<typename Left_t, typename Right_t>
 Left_t addition(const Left_t& i_left, const Right_t& i_right){
 	return i_left + i_right;
@@ -369,7 +362,28 @@ j_value& j_value::operator/=(const j_value& irk_val){
 	return *this;
 }
 
+class Modulo_Class{
+public:
+	template<typename Ret_t, typename Left_t, typename Right_t>
+	void operator()(const Left_t& i_left, const Right_t& i_right, Ret_t* i_destination)const{
+		if(!i_right){
+			throw J_Value_Error("Division By Zero");
+		}
+		*i_destination = static_cast<Ret_t>(static_cast<j_llint>(i_left) 
+											% static_cast<j_llint>(i_right));
+	}
+};
 
+j_value& j_value::operator%=(const j_value& irk_val){
+	//Need to do unit like things here
+	assert(Value_Types::STRING != M_type);
+	assert(Value_Types::STRING != irk_val.M_type);
+
+	assert(Value_Types::BOOL != M_type);
+
+	binary_value_operation_no_str_or_bool(irk_val, Modulo_Class());
+	return *this;
+}
 
 bool j_value::value_status()const{
 	return M_has_value_status;
@@ -402,24 +416,12 @@ j_value::Value_Types j_value::type()const{
 	return M_type;
 }
 
-template<>
-std::string j_value::cast_to()const{
-	switch(M_type){
-	case j_value::Value_Types::LL_INTEGER:
-		return to_string(M_val.llint_val);
-	case j_value::Value_Types::DOUBLE:
-		return to_string(M_val.dbl_val);
-	case j_value::Value_Types::BOOL:
-		return M_val.bool_val ? "true" : "false";
-	case j_value::Value_Types::STRING:
-		return *M_val.str_val;
-	case j_value::Value_Types::AGGREGATE:
-		return M_val.aggregate_val->get_wrangler_str_val(empty_arguments());
-	case j_value::Value_Types::UNDEFINIED:
-		throw J_Value_Error("Undefined Value type");
-	default:
-		throw J_Value_Error("Could not convert type to string");
-	}
+std::string j_value::as_string()const{
+	return cast_to<std::string>();
+}
+
+bool j_value::as_bool()const{
+	return cast_to<bool>();
 }
 
 template<typename Ret_t>
@@ -449,17 +451,23 @@ Ret_t j_value::cast_to()const{
 
 }
 
-std::string j_value::as_string()const{
-	return cast_to<std::string>();
+template<>
+std::string j_value::cast_to()const{
+	switch(M_type){
+	case j_value::Value_Types::LL_INTEGER:
+		return to_string(M_val.llint_val);
+	case j_value::Value_Types::DOUBLE:
+		return to_string(M_val.dbl_val);
+	case j_value::Value_Types::BOOL:
+		return M_val.bool_val ? "true" : "false";
+	case j_value::Value_Types::STRING:
+		return *M_val.str_val;
+	case j_value::Value_Types::UNDEFINIED:
+		throw J_Value_Error("Undefined Value type");
+	default:
+		throw J_Value_Error("Could not convert type to string");
+	}
 }
-
-bool j_value::as_bool()const{
-	return cast_to<bool>();
-}
-
-
-
-
 
 j_llint j_value::as_llint()const{
 
@@ -586,8 +594,6 @@ Symbol_Types j_value::symbol_type()const{
 		return Symbol_Types::STRING;
 	case Value_Types::VOID:
 		return Symbol_Types::VOID_TYPE;
-	case Value_Types::AGGREGATE:
-		return Symbol_Types::AGGREGATE;
 	case Value_Types::UNDEFINIED:
 		return Symbol_Types::EXPRESSION_TYPE_UNINITIALIZED;
 	default:
@@ -628,22 +634,22 @@ void j_value::convert_to_type(Value_Types i_type){
 		throw J_Value_Error("Cannot convert j_value type when j_value has no value");
 	}
 
-	j_value temp_type(*this);
-	J_Unit old_units = temp_type.units();
+	j_value temp_val(*this);
+	J_Unit old_units = temp_val.units();
 	clear();
 
 	switch(i_type){
 	case j_value::Value_Types::LL_INTEGER:
-		(*this) = j_value(temp_type.as_llint(), old_units);
+		(*this) = j_value(temp_val.as_llint(), old_units);
 		break;
 	case j_value::Value_Types::DOUBLE:
-		(*this) = j_value(temp_type.as_double(), old_units);
+		(*this) = j_value(temp_val.as_double(), old_units);
 		break;
 	case j_value::Value_Types::BOOL:
-		(*this) = j_value(temp_type.as_bool(), old_units);
+		(*this) = j_value(temp_val.as_bool(), old_units);
 		break;
 	case j_value::Value_Types::STRING:
-		(*this) = j_value(temp_type.as_string(), old_units);
+		(*this) = j_value(temp_val.as_string(), old_units);
 		break;
 	case j_value::Value_Types::UNDEFINIED:
 	default:
@@ -837,53 +843,14 @@ j_value operator!=(const j_value& irk_left, const j_value& irk_right){
 	return j_value(left_val.as_bool(), J_Unit());
 }
 
-class Modulo_Class{
-public:
-	template<typename Ret_t, typename Left_t, typename Right_t>
-	void operator()(const Left_t& i_left, const Right_t& i_right, Ret_t* i_destination)const{
-		*i_destination = static_cast<Ret_t>(i_left % i_right);
-	}
-};
-
 
 
 j_value operator%(const j_value& irk_left, const j_value& irk_right){
 	j_value left_val(irk_left);
-
-	left_val.binary_value_operation_llint(irk_right, Modulo_Class());
-
-	return j_value(left_val.as_bool(), J_Unit());
+	return left_val %= irk_right;
 }
 
-template<typename Operator_Class>
-void j_value::binary_value_operation_llint(
-	const j_value& i_right, const Operator_Class& i_func){
 
-	j_value right_val(i_right);
-
-	if(type() != right_val.type()){
-		convert_to_same_type(this, &right_val);
-	}
-
-
-
-
-	switch(M_type){
-	case Value_Types::LL_INTEGER:
-		binary_value_operation(
-			M_val.llint_val, i_right, &M_val.llint_val, i_func);
-		break;
-	case Value_Types::DOUBLE:
-		throw J_Value_Error("Double in wrong binary value_operation function");
-	case Value_Types::BOOL:
-		throw J_Value_Error("Bool in wrong binary value_operation function");
-	case Value_Types::STRING:
-		throw J_Value_Error("String in wrong binary value_operation function");
-	default:
-		assert(!"Unhandled Value Type");
-	}
-
-}
 }
 
 
