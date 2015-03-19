@@ -9,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.os.Message;
 import android.telephony.SmsMessage;
 
 public class Database_Connector{
@@ -47,7 +48,7 @@ public void reset_table(){
 public void open() throws SQLException{
   // create or open a database for reading/writing
   M_database = databaseOpenHelper.getWritableDatabase();
-}
+ }
 
 // close the database connection
 public void close(){
@@ -116,6 +117,16 @@ public void deleteContact(long id){
   close(); // close the database
 } 
 
+public Cursor get_last_message_for_all_contacts(){
+	Cursor cursor
+	= M_database.query(
+			true, MESSAGE_TABLE_NAME_STRING, new String[]{"_id", "sender_id", "message"}
+			, null, null, null, null, null, null);
+	
+	
+	
+	return cursor;
+}
 
 public void insert_message(SmsMessage i_message){
 	Cursor cursor

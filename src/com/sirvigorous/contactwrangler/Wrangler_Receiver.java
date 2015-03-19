@@ -50,12 +50,13 @@ public void onReceive(Context context, Intent intent){
             	System.out.println("Blocked message from number: " + number);
             	add_message_to_database(cur_message);
             	abortBroadcast();
+            }else{
+            	Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+            	
             }
-            
-        
-        }
+        }	
 
-        Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+        
 
     }
 
@@ -69,8 +70,9 @@ private void add_message_to_database(SmsMessage i_message){
 	= new Database_Connector(M_context);
 	
 	//TODO: Somehow notify running activity that a message has been received
-	
+	database_connector.open();
 	database_connector.insert_message(i_message);
+	database_connector.close();
 	
 	
 	

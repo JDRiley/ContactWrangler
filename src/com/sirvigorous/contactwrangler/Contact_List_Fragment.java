@@ -256,7 +256,7 @@ public class Contact_List_Fragment extends ListFragment {
 				.update_to_database();
 			
 			
-			new Contact((Contacts_Wrangler_Activity)getActivity(), "Jasmine", "Other Xi", 15555555554l, rules[0])
+			new Contact((Contacts_Wrangler_Activity)getActivity(), "Jasmine", "Other Xi", 15555215554l, rules[0])
 				.update_to_database();;
 			
 			new Contact((Contacts_Wrangler_Activity)getActivity(), "Danielle", "House Party", 2024576288l, rules[1])

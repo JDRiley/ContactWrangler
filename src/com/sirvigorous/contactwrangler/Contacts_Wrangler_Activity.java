@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -66,6 +68,8 @@ static public final String ROW_ID = "Contact_database_row_id";
 		
 		M_drawer_list.setOnItemClickListener(new DrawerItemClickListener());
 		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
 		
 		
 		M_drawer_toggler =  new ActionBarDrawerToggle(this, M_drawer_layout,
@@ -87,10 +91,6 @@ static public final String ROW_ID = "Contact_database_row_id";
 		};
 		
 		M_drawer_layout.setDrawerListener(M_drawer_toggler);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		
-		getActionBar().setHomeButtonEnabled(true);
 		
 		if(savedInstanceState != null){
 			return;
@@ -139,8 +139,10 @@ static public final String ROW_ID = "Contact_database_row_id";
 	@Override
 	public void on_contact_selected(Contact i_Contact) {
 
-
-		switch_main_body_fragment(new Contact_Detail_Fragment(i_Contact), "Detail Fragment");
+		Contact_Detail_Fragment new_detail_fragment = new Contact_Detail_Fragment();
+		new_detail_fragment.set_contact(i_Contact);
+		
+		switch_main_body_fragment(new_detail_fragment, "Detail Fragment");
 		
 	}
 	
@@ -175,14 +177,14 @@ static public final String ROW_ID = "Contact_database_row_id";
 	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
 	    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-	        selectItem(position);
+	        select_item(position);
 	    }
 
 
 	}
 
-/** Swaps fragments in the main content view */
-private void selectItem(int i_position ){
+/** Swaps fragments in the main activity view */
+private void select_item(int i_position ){
     // Create a new fragment and specify the planet to show based on position
     Fragment new_fragment = null;
 	switch(i_position){
@@ -190,7 +192,7 @@ private void selectItem(int i_position ){
 		new_fragment = new Notifications_Fragment();
 		break;
 	case 1:
-		assert(null == "Did not implement Messages View");
+		new_fragment = new Messages_Fragment();
 		break;
 	case 2:
 		new_fragment = new Contact_List_Fragment();
@@ -252,7 +254,18 @@ public void setTitle(CharSequence title) {
 
 	@Override
 	 public boolean onCreateOptionsMenu(Menu menu){
+		
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		if(M_drawer_toggler.onOptionsItemSelected(item)){
+			return true;
+		}
+		
+		return super.onOptionsItemSelected(item);
 	}
 }
 

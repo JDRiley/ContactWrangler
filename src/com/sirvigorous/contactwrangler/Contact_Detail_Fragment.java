@@ -25,6 +25,7 @@ public class Contact_Detail_Fragment extends Fragment {
 	 * The dummy content this fragment is presenting.
 	 */
 
+	
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -33,9 +34,7 @@ public class Contact_Detail_Fragment extends Fragment {
 	public Contact_Detail_Fragment() {
 	}
 
-	public Contact_Detail_Fragment(Contact i_contact){
-		M_contact = i_contact;
-	}
+
 	
 
 	@Override
@@ -66,7 +65,8 @@ public class Contact_Detail_Fragment extends Fragment {
 		return root_view;
 	}
 	
-	private final void set_contact(Contact i_contact){
+	final public void set_contact(Contact i_contact){
+		
 		M_contact = i_contact;
 		M_name_text.setText(M_contact.name());
 		M_location_text.setText(M_contact.location());

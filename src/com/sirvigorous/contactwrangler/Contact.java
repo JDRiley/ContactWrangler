@@ -2,7 +2,7 @@ package com.sirvigorous.contactwrangler;
 
 
 import android.database.Cursor;
-import android.location.Location;
+
 
 import com.sirvigorous.contactwrangler.Database_Connector;
 import com.sirvigorous.contactwrangler.Contacts_Wrangler_Activity;
@@ -36,6 +36,7 @@ public Contact(Contacts_Wrangler_Activity i_context, long i_id){
 private final void set_data_from_database_id(long i_id){
 	Database_Connector database_connecter
 	= new Database_Connector(M_context);
+	database_connecter.open();
 	Cursor cursor = database_connecter.getOneContact(i_id);
 	
 	
@@ -47,7 +48,7 @@ private final void set_data_from_database_id(long i_id){
 	M_phone_number  = cursor.getLong(value_index++);
 	M_rule = cursor.getString(value_index++);
 	
-	
+	database_connecter.close();
 }
 
 public void update_to_database(){
